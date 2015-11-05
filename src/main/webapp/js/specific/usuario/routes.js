@@ -61,7 +61,8 @@ function fUsuarioRoutes() {
         header.empty().append(fillDocumentoPageHeader('View'));
         var strParam = parameter.getUrlObjectFromUrlString(this.params['url']);
         ausiasFLOW.reset();
-        ausiasFLOW.initialize(viewModule, content, strClass, 'view', strParam);
+//        ausiasFLOW.initialize(viewModule, content, strClass, 'view', strParam);
+        ausiasFLOW.initialize(usuarioViewb, content, strClass, 'usuarioviewb', strParam);
         return false;
     });
     //--------------------------------------------------------------------------
