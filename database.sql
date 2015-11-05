@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 04-11-2015 a las 01:39:45
+-- Tiempo de generación: 05-11-2015 a las 09:14:51
 -- Versión del servidor: 5.6.26
 -- Versión de PHP: 5.5.29
 
@@ -292,30 +292,30 @@ CREATE TABLE IF NOT EXISTS `post` (
   `id` int(11) NOT NULL COMMENT 'Num.',
   `id_usuario` int(11) DEFAULT NULL COMMENT 'Usuario',
   `id_documento` int(11) DEFAULT NULL COMMENT 'Documento',
-  `fecha` datetime DEFAULT NULL COMMENT 'Publicacion',
-  `mensaje` text COLLATE utf8_unicode_ci
+  `mensaje` text COLLATE utf8_unicode_ci COMMENT 'Mensaje',
+  `fecha` datetime DEFAULT NULL COMMENT 'Fecha'
 ) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Volcado de datos para la tabla `post`
 --
 
-INSERT INTO `post` (`id`, `id_usuario`, `id_documento`, `fecha`, `mensaje`) VALUES
-(1, 3, 1, '2015-11-02 09:07:59', NULL),
-(2, 5, 2, '2015-10-04 07:46:22', NULL),
-(3, 8, 58, '2015-09-29 05:11:35', NULL),
-(4, 2, 26, '2015-09-27 16:14:13', NULL),
-(5, 6, 8, '2015-09-04 00:00:00', NULL),
-(6, 27, 58, '2015-09-16 18:32:45', NULL),
-(7, 8, 28, '2015-09-15 06:39:18', NULL),
-(8, 17, 27, '2015-09-14 08:14:59', NULL),
-(9, 19, 73, '2015-11-28 11:14:40', NULL),
-(10, 1, 29, '2015-11-01 08:17:28', NULL),
-(11, 14, 28, NULL, NULL),
-(12, 20, 48, '2015-11-17 09:18:20', NULL),
-(13, 26, 77, '2015-09-08 07:17:00', NULL),
-(14, 29, 57, '2015-09-29 07:15:38', NULL),
-(15, 13, 5, '2015-11-23 13:15:15', NULL);
+INSERT INTO `post` (`id`, `id_usuario`, `id_documento`, `mensaje`, `fecha`) VALUES
+(1, 3, 1, 'aasdfg', '2015-11-02 12:17:19'),
+(2, 5, 2, 'qwerty', '2015-10-04 03:07:03'),
+(3, 8, 58, 'pouihfpoiugb qepifv', '2015-09-29 17:30:00'),
+(4, 2, 26, 'wiutdf gwqdfgqw fvwf wydfg ibf', '2015-09-27 07:13:37'),
+(5, 6, 8, 'fcvigyvk gdw wqdb di vw', '2015-09-04 21:13:33'),
+(6, 27, 58, 'lorem ipsum', '2015-09-16 06:30:14'),
+(7, 8, 28, 'one piece treasure cruise para android y mac es la polla', '2015-09-15 13:50:31'),
+(8, 17, 27, '¿Qué opinas sobre las personas que no pegan ni chapa en clase? (como yo)', '2015-09-14 09:32:19'),
+(9, 19, 73, 'ambrosio deja de pelarte la clase', '2015-11-28 05:48:27'),
+(10, 1, 29, 'pepito come macarrones, mama no quiero macarrones', '2015-11-01 18:29:25'),
+(11, 14, 28, 'hola fondo norte.\r\nhola fondo surrr.', NULL),
+(12, 20, 48, 'El teclado blanco de Microsoft mola mucho, el teclado negro  de Logitech no me gusta nada.', '2015-11-17 00:28:00'),
+(13, 26, 77, 'El cargador de móvil inalámbrico funciona pefectamente.', '2015-09-08 02:17:44'),
+(14, 29, 57, 'El mes de Septiembre es fresquito.', '2015-09-29 21:20:32'),
+(15, 13, 5, 'Me gustaría saber que opinión tienen sobre la nueva versión de Android. ', '2015-11-23 11:18:23');
 
 -- --------------------------------------------------------
 
@@ -621,8 +621,6 @@ ALTER TABLE `tipousuario`
 --
 ALTER TABLE `usuario`
   MODIFY `id` int(6) NOT NULL AUTO_INCREMENT COMMENT 'Identificador',AUTO_INCREMENT=31;
-
-
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
