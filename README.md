@@ -1,2 +1,5 @@
 # ausiasYield2015
-ausiàsYield2015
+
+Project based on openAusiàs & ausiàsFLOW
+
+
