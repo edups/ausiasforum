@@ -111,6 +111,23 @@ appMenu = function () {
                                     )
 
                             )
+                    )+
+            dom.li('class="dropdown"',
+                    dom.a('href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"',
+                            dom.i('class="fa fa-on-list-alt"', '') +
+                            'Proyectos' +
+                            dom.span('class="caret"', '')
+                            ) +
+                    dom.ul('class="dropdown-menu" role="menu"',
+                            dom.li('class="dropdown-header"', 'Foro') +
+                            dom.li('',
+                                    dom.a('href="#/post/plist"',
+                                            dom.i('class="fa fa-fw fa-clipboard"', '') +
+                                            'Foro'
+                                            )
+                                    ) 
+
+                            )
                     )
             )
 }
