@@ -29,16 +29,21 @@ var usuarioViewb = function () {
 };
 usuarioViewb.prototype = new viewModule();
 usuarioViewb.prototype.getViewTemplate_func = function (strClass, jsonDataViewModule) {
-    var tabla = "<table class=\"table table table-bordered table-condensed\">";
+      var tabla = "<table class=\"table table table-bordered table-condensed\">";
     var jsonMeta = jsonDataViewModule.meta.message;
     var jsonBean = jsonDataViewModule.bean.message;
     var valor;
     for (var k in jsonMeta) {
-        var cabecera = jsonMeta[k].ShortName;
-        valor = html.printPrincipal(jsonBean[jsonMeta[k].Name]);
+        var cabecera = jsonMeta[k].ShortName;        
+        if (jsonMeta[k].IsObjForeignKey){
+            nombre_obj=jsonMeta[k].Name;
+            valor= {data: jsonBean[nombre_obj], meta:jsonMeta[k]};            
+        } else {
+            valor = jsonBean[jsonMeta[k].Name];
+        }                
+        var resultado= html.printPrincipal(valor);
 //        valor = html.printPrincipal(jsonMeta[k]);
-
-        tabla += '<tr><td><strong>' + cabecera + '</strong></td><td>' + valor + '</td></tr>';
+        tabla += '<tr><td><strong>' + cabecera + '</strong></td><td>' + resultado + '</td></tr>';
 
     }
     tabla += '</table>';
