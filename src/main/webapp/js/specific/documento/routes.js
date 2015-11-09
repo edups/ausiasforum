@@ -93,11 +93,8 @@ function fDocumentoRoutes() {
         var strParam = parameter.getUrlObjectFromUrlString(this.params['url']);
         if (strParam) {
             strParam.vf = 4;
-            if (!strParam.id) {
-                strParam.id = 1;
-            }
         } else {
-            strParam = {'vf': 4, 'id': 1};
+            strParam = {'vf': 4};
         }
         header.empty().append(fillDocumentoPageHeader('Composed operation'));
         content.empty().append('<div class="col-md-8" id="c1"></div><div class="col-md-4" id="c2"></div>')

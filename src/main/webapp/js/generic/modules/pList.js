@@ -45,10 +45,10 @@ var pListModule = function () {
     var urlWithoutRpp;
 }
 pListModule.prototype = new listModule();
-pListModule.prototype.refresh = function () {
-    ausiasFLOW.renderPage();
-    return false;
-};
+//pListModule.prototype.refresh = function () {
+//    ausiasFLOW.renderPage();
+//    return false;
+//};
 pListModule.prototype.loadThButtons = function (meta, strClase, UrlFromParamsWithoutOrder) {
     return button.getTableHeaderButtons(meta.Name, strClase, 'plist', UrlFromParamsWithoutOrder);
 }

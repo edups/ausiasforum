@@ -46,10 +46,11 @@ documentoPaginatedList.prototype.bind = function () {
     $('.btn.btn-default.abc').unbind('click');
     $('.btn.btn-default.abc').click(function (event) {
         
-        ausiasFLOW.getComponent('view').strParams['id'] = parseInt($(this).attr('id'));
+        ausiasFLOW.getComponentByModuleName('view').strParams['id'] = parseInt($(this).attr('id'));
         
         //ausiasFLOW.viewModule_paramsObject['id'] = parseInt($(this).attr('id'));
-        ausiasFLOW.flowRender();
+        //ausiasFLOW.flowRender();
+        ausiasFLOW.dataRenderFillAndBind(ausiasFLOW.getComponentByModuleName('view'));
         return false;
     });
 }

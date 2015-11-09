@@ -44,7 +44,7 @@ bpListModule.prototype.bindAll = function (place, objParams, callbackFunction, o
         
         //ausiasFLOW.pListModule_paramsObject = paramsObject;
         thisObject.strParams=paramsObject;
-        ausiasFLOW.renderComponent(thisObject, true);
+        ausiasFLOW.dataRenderFillAndBind(thisObject, true);
         return false;
     });
     $('#selectVisibleFields').unbind('change');
@@ -54,7 +54,7 @@ bpListModule.prototype.bindAll = function (place, objParams, callbackFunction, o
         
         thisObject.strParams=paramsObject;
         //ausiasFLOW.pListModule_paramsObject = paramsObject;
-        ausiasFLOW.renderComponent(thisObject, true);
+        ausiasFLOW.dataRenderFillAndBind(thisObject, true);
         return false;
     });
     $('.rpp_link').unbind('click');
@@ -64,7 +64,7 @@ bpListModule.prototype.bindAll = function (place, objParams, callbackFunction, o
         
         thisObject.strParams=paramsObject;
         //ausiasFLOW.pListModule_paramsObject = paramsObject;
-        ausiasFLOW.renderComponent(thisObject, true);
+        ausiasFLOW.dataRenderFillAndBind(thisObject, true);
         return false;
     });
     if (callbackFunction) {
@@ -83,7 +83,7 @@ bpListModule.prototype.bindAll = function (place, objParams, callbackFunction, o
         
         thisObject.strParams=paramsObject;
         //ausiasFLOW.pListModule_paramsObject = paramsObject;
-        ausiasFLOW.renderComponent(thisObject, true);
+        ausiasFLOW.dataRenderFillAndBind(thisObject, true);
         return false;
     });
     $('.orderAsc').unbind('click');
@@ -94,7 +94,7 @@ bpListModule.prototype.bindAll = function (place, objParams, callbackFunction, o
         
         thisObject.strParams=paramsObject;
         //ausiasFLOW.pListModule_paramsObject = paramsObject;
-        ausiasFLOW.renderComponent(thisObject, true);
+        ausiasFLOW.dataRenderFillAndBind(thisObject, true);
         return false;
     });
     $('.orderDesc').unbind('click');
@@ -105,7 +105,7 @@ bpListModule.prototype.bindAll = function (place, objParams, callbackFunction, o
         
         thisObject.strParams=paramsObject;
         //ausiasFLOW.pListModule_paramsObject = paramsObject;
-        ausiasFLOW.renderComponent(thisObject, true);
+        ausiasFLOW.dataRenderFillAndBind(thisObject, true);
         return false;
     });
     $('#linkQuitarOrden').unbind('click');
@@ -114,7 +114,7 @@ bpListModule.prototype.bindAll = function (place, objParams, callbackFunction, o
         
         thisObject.strParams=paramsObject;
         //ausiasFLOW.pListModule_paramsObject = paramsObject;
-        ausiasFLOW.renderComponent(thisObject, true);
+        ausiasFLOW.dataRenderFillAndBind(thisObject, true);
         return false;
     });
     $('#linkQuitarFiltro').unbind('click');
@@ -123,7 +123,7 @@ bpListModule.prototype.bindAll = function (place, objParams, callbackFunction, o
         
         thisObject.strParams=paramsObject;
         //ausiasFLOW.pListModule_paramsObject = paramsObject;
-        ausiasFLOW.renderComponent(thisObject, true);
+        ausiasFLOW.dataRenderFillAndBind(thisObject, true);
         return false;
     });
 }
