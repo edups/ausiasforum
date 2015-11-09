@@ -85,6 +85,14 @@ function fPostRoutes() {
         ausiasFLOW.initialize(postPlist, content, strClass, 'plist', strParam);
         return false;
     });
+    Path.map("#/" + strClass + "/postdocumento(/:url)").to(function () {
+//        
+        header.empty().append(fillDocumentoPageHeader('Listado de Hilos'));
+        var strParam = parameter.getUrlObjectFromUrlString(this.params['url']);
+        ausiasFLOW.reset();
+        ausiasFLOW.initialize(postDocumento, content, strClass, 'plist', strParam);
+        return false;
+    });
     
 }
 
