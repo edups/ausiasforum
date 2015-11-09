@@ -203,7 +203,8 @@
         <!-- --------------------------------------------------------------- -->
         <script type="text/javascript">
             function resetCSS() {
-                document.getElementById('mainStyle').disabled = false;
+//                document.getElementById('mainStyle').disabled = false;
+                $('<link href="css/main/main.css" rel="stylesheet" type="text/css"/>').appendTo("head");
             }
             function loadRoutes() {
                 fUsuarioRoutes();
