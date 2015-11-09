@@ -27,7 +27,6 @@
 package net.daw.service.specific.implementation;
 
 import net.daw.service.generic.implementation.TableServiceGenImpl;
-
 import javax.servlet.http.HttpServletRequest;
 
 
@@ -36,22 +35,4 @@ public class PostService extends TableServiceGenImpl {
     public PostService(HttpServletRequest request) {
         super(request);
     }
-
-//    public String getcontenido(Integer id) throws Exception {
-//        String data;
-//        Connection oConnection = null;
-//        DocumentoBean oDocumentoBean;
-//        try {
-//            oConnection = new BoneConnectionPoolImpl().newConnection();
-//            oDocumentoBean = new DocumentoBean();
-//            oDocumentoBean.setId(id);
-//            DocumentoDao oDocumentoDao = new DocumentoDao(oConnection);
-//            oDocumentoBean = oDocumentoDao.get(oDocumentoBean, AppConfigurationHelper.getJsonDepth());
-//
-//        } catch (Exception e) {
-//            throw new ServletException("GetContenido: View Error: " + e.getMessage());
-//        }
-//        oConnection.close();
-//        return "{\"data\":\"" + oDocumentoBean.getContenido() + "\"}";
-//    }
 }

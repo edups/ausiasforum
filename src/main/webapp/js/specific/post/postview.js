@@ -25,10 +25,10 @@
  * THE SOFTWARE.
  * 
  */
-var usuarioViewb = function () {
+var postView = function () {
 };
-usuarioViewb.prototype = new viewModule();
-usuarioViewb.prototype.getViewTemplate_func = function (strClass, jsonDataViewModule) {
+postView.prototype = new viewModule();
+postView.prototype.getViewTemplate_func = function (strClass, jsonDataViewModule) {
     var tabla = "<table class=\"table table table-bordered table-condensed\">";
     var jsonMeta = jsonDataViewModule.meta.message;
     var jsonBean = jsonDataViewModule.bean.message;

@@ -47,7 +47,7 @@ function fPostRoutes() {
         header.empty().append(fillDocumentoPageHeader('New'));
         var strParam = parameter.getUrlObjectFromUrlString(this.params['url']);
         ausiasFLOW.reset();
-        ausiasFLOW.initialize(newModule, content, strClass, 'new', strParam);
+        ausiasFLOW.initialize(postNew, content, strClass, 'new', strParam);
         return false;
     });
     //--------------------------------------------------------------------------    
@@ -55,7 +55,7 @@ function fPostRoutes() {
         header.empty().append(fillDocumentoPageHeader('Edit'));
         var strParam = parameter.getUrlObjectFromUrlString(this.params['url']);
         ausiasFLOW.reset();
-        ausiasFLOW.initialize(editModule, content, strClass, 'edit', strParam);
+        ausiasFLOW.initialize(postEdit, content, strClass, 'edit', strParam);
         return false;
     });
     //--------------------------------------------------------------------------
@@ -63,7 +63,7 @@ function fPostRoutes() {
         header.empty().append(fillDocumentoPageHeader('View'));
         var strParam = parameter.getUrlObjectFromUrlString(this.params['url']);
         ausiasFLOW.reset();
-        ausiasFLOW.initialize(viewModule, content, strClass, 'view', strParam);
+        ausiasFLOW.initialize(postView, content, strClass, 'view', strParam);
         return false;
     });
     //--------------------------------------------------------------------------    
@@ -77,12 +77,12 @@ function fPostRoutes() {
     //--------------------------------------------------------------------------
     Path.map("#/" + strClass + "/plist(/:url)").to(function () {
 //        $( "<style>background-color: black;</style>" ).appendTo( content );
-           var myEstilo ="./paquito.css";
-           $('<link rel="stylesheet" type="text/css href="'+myEstilo+'">').appendTo("body");
+//           var myEstilo ="paquito.css";
+           $('<link href="css/specific/paquito.css" rel="stylesheet" type="text/css"/>').appendTo("head");
         header.empty().append(fillDocumentoPageHeader('Paginated List'));
         var strParam = parameter.getUrlObjectFromUrlString(this.params['url']);
         ausiasFLOW.reset();
-        ausiasFLOW.initialize(pListModule, content, strClass, 'plist', strParam);
+        ausiasFLOW.initialize(postPlist, content, strClass, 'plist', strParam);
         return false;
     });
     
