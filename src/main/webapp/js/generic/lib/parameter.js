@@ -112,7 +112,7 @@ var parameter = {
     printSystemFilterParamsInUrl: function (objParams) {
         if (objParams)
             if (objParams.systemfilter) {
-                return "&systemfilter=" + this.objParams.systemfilter + "&systemfilteroperator=" + this.objParams.systemfilteroperator + "&systemfiltervalue=" + this.objParams.systemfiltervalue;
+                return "&systemfilter=" + objParams.systemfilter + "&systemfilteroperator=" + objParams.systemfilteroperator + "&systemfiltervalue=" + objParams.systemfiltervalue;
             } else {
                 return '';
             }
