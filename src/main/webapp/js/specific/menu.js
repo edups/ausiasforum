@@ -121,7 +121,7 @@ appMenu = function () {
                     dom.ul('class="dropdown-menu" role="menu"',
                             dom.li('class="dropdown-header"', 'Foro') +
                             dom.li('',
-                                    dom.a('href="#/post/plist"',
+                                    dom.a('href="#/documento/hiloplist/page=1&rpp=10&vf=3&filter=obj_tipodocumento&filteroperator=equals&filtervalue=1"',
                                             dom.i('class="fa fa-fw fa-clipboard"', '') +
                                             'Foro'
                                             )

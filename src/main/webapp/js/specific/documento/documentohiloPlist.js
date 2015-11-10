@@ -1,8 +1,8 @@
-/* 
+/*
  * Copyright (c) 2015 by Rafael Angel Aznar Aparici (rafaaznar at gmail dot com)
  * 
  * openAUSIAS: The stunning micro-library that helps you to develop easily 
- * AJAX web applications by using Java and jQuery
+ *             AJAX web applications by using Java and jQuery
  * openAUSIAS is distributed under the MIT License (MIT)
  * Sources at https://github.com/rafaelaznar/openAUSIAS
  * 
@@ -23,31 +23,59 @@
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
- * 
  */
 
- postPlist= function () {
+var documentohiloPlist = function () {
 
 };
-postPlist.prototype = new pListModule();
-postPlist.prototype.getHeaderPageTableFunc = function (jsonMeta, strOb, UrlFromParamsWithoutOrder, visibles, acciones) {
+documentohiloPlist.prototype = new pListModule();
+
+documentohiloPlist.prototype.loadButtons = function (rowValues, strClass) {
+    var botonera = "";
+    botonera += '<div class="btn-toolbar" role="toolbar"><div class="btn-group btn-group-xs">';
+    botonera += '<a class="btn btn-default view" id="' + rowValues[0].data + '"  href="#/' + strClass + '/view/' + rowValues[0].data + '"><i class="glyphicon glyphicon-eye-open"></i></a>';
+    botonera += '<a class="btn btn-default edit" id="' + rowValues[0].data + '"  href="#/' + strClass + '/edit/' + rowValues[0].data + '"><i class="glyphicon glyphicon-pencil"></i></a>';
+    botonera += '<a class="btn btn-default remove" id="' + rowValues[0].data + '"  href="#/' + strClass + '/remove/' + rowValues[0].data + '"><i class="glyphicon glyphicon-remove"></i></a>';
+    botonera += '<a class="btn btn-default abc" id="' + rowValues[0].data + '"  href="#/' + strClass + '/abc/' + rowValues[0].data + '"><i class="fa fa-arrow-right fa-1x"></i></a>';
+    botonera += '</div></div>';
+    return botonera;
+};
+
+
+documentohiloPlist.prototype.getHeaderPageTableFunc = function (jsonMeta, strOb, UrlFromParamsWithoutOrder, visibles, acciones) {
     thisObject = this;
     acciones = typeof (acciones) != 'undefined' ? acciones : true;
-    arr_meta_data_tableHeader = _.map(jsonMeta, function (oMeta, key) {
+    
+     arr_meta_data_tableHeader_filtered = _.filter(jsonMeta, function(oItem){
+        if (oItem.Name=="id" || oItem.Name=="titulo" || oItem.Name=="alta") {
+            return true;
+        } else {
+            return false;
+        }
+    } );
+    
+    
+    
+    arr_meta_data_tableHeader = _.map(arr_meta_data_tableHeader_filtered, function (oMeta, key) {
         if (oMeta.IsId) {
-            return '<div class="col-md-1">'
+            return '<div class="col-md-8">'
                     + oMeta.UltraShortName
                     + '<br />'
                     + thisObject.loadThButtons(oMeta, strOb, UrlFromParamsWithoutOrder)
                     + '</div>';
         } else {
-            return  '<div class="col-md-1">'
+            return  '<div class="col-md-2">'
                     + oMeta.UltraShortName 
                     + '<br />'
                     + thisObject.loadThButtons(oMeta, strOb, UrlFromParamsWithoutOrder)
                     + '</div>';
         }
     });
+    
+
+   
+    
+    
     //visibles
     if (visibles) {
         arr_meta_data_tableHeader_visibles = arr_meta_data_tableHeader.slice(0, parseInt(visibles));
@@ -55,13 +83,13 @@ postPlist.prototype.getHeaderPageTableFunc = function (jsonMeta, strOb, UrlFromP
         arr_meta_data_tableHeader_visibles = arr_meta_data_tableHeader;
     }
     if (acciones) {
-        arr_meta_data_tableHeader_visibles_acciones = arr_meta_data_tableHeader_visibles.concat(['<div class="col-md-3">Acciones </div>']);
+        arr_meta_data_tableHeader_visibles_acciones = arr_meta_data_tableHeader_visibles.concat(['<div class="col-md-2">Acciones </div>']);
     } else {
         arr_meta_data_tableHeader_visibles_acciones = arr_meta_data_tableHeader_visibles;
     }
     return '<div class="row">' + arr_meta_data_tableHeader_visibles_acciones.join('') + '</div>';
 }
-postPlist.prototype.getBodyPageTableFunc = function (meta, page, printPrincipal, tdButtons_function, trPopup_function, visibles) {
+documentohiloPlist.prototype.getBodyPageTableFunc = function (meta, page, printPrincipal, tdButtons_function, trPopup_function, visibles) {
     //thisObject.jsonData.message.page.list: es un array de objetos. Cada objeto contiene una fila de la tabla de la petición
     //thisObject.jsonData.message.meta; es un array de objetos. Every object contains metadata from every object to print in every row
     var matrix_meta_data = _.map(page, function (oRow, keyRow) {
@@ -73,7 +101,7 @@ postPlist.prototype.getBodyPageTableFunc = function (meta, page, printPrincipal,
     //every object contains the data and its metadata
     var arr_meta_data_table_buttons = _.map(matrix_meta_data, function (value, key) {
         return (_.map(matrix_meta_data[key], function (value2, key2) {
-            return  '<div class="col-md-1 matriz">' + printPrincipal(value2) + '</div>';
+            return  '<div class="col-md-4 matriz">' + printPrincipal(value2) + '</div>';
         })
                 )
                 .slice(0, parseInt(visibles))

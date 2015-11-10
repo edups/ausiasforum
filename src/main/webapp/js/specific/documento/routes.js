@@ -111,6 +111,13 @@ function fDocumentoRoutes() {
         ausiasFLOW.initialize(documentosautorList, content, 'documentosautor', 'list', strParam);
         return false;
     });
-
+    //--------------------------------------------------------------------------
+    Path.map("#/" + strClass + "/hiloplist(/:url)").to(function () {
+        header.empty().append(fillDocumentoPageHeader('Lista paginada de hilos'));
+        var strParam = parameter.getUrlObjectFromUrlString(this.params['url']);
+        ausiasFLOW.reset();
+        ausiasFLOW.initialize(documentohiloPlist, content, strClass, 'plist', strParam);
+        return false;
+    });
 
 }
