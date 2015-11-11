@@ -78,7 +78,7 @@ documentohiloPlist.prototype.getHeaderPageTableFunc = function (jsonMeta, strOb,
     
     //visibles
     if (visibles) {
-        arr_meta_data_tableHeader_visibles = arr_meta_data_tableHeader.slice(0, parseInt(visibles));
+        arr_meta_data_tableHeader_visibles = arr_meta_data_tableHeader.slice(1, parseInt(visibles));
     } else {
         arr_meta_data_tableHeader_visibles = arr_meta_data_tableHeader;
     }
@@ -108,7 +108,7 @@ documentohiloPlist.prototype.getBodyPageTableFunc = function (meta, page, printP
             return  '<div class="col-md-3 matriz">' + printPrincipal(value2) + '</div>';
         })
                 )
-                .slice(0, parseInt(visibles))
+                .slice(1, parseInt(visibles))
                 .concat(['<div class="botns">' + tdButtons_function(value, strOb) + '</div>']);
     });
     //is an array (rpp) of arrays (rows) of strings
