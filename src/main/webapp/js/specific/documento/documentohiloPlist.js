@@ -53,8 +53,8 @@ documentohiloPlist.prototype.getHeaderPageTableFunc = function (jsonMeta, strOb,
             return false;
         }
     } );
-    
-    
+
+
     
     arr_meta_data_tableHeader = _.map(arr_meta_data_tableHeader_filtered, function (oMeta, key) {
         if (oMeta.IsId) {
@@ -97,10 +97,14 @@ documentohiloPlist.prototype.getBodyPageTableFunc = function (meta, page, printP
             return  {meta: oMeta, data: oRow[oMeta.Name]};
         });
     });
+    //Filtra los campos del array de objetos recogiendo los que son necesarios en nuestro caso
+    matrix_meta_data_filtered = _.map(matrix_meta_data,function(oFilter){
+        return _.pick(oFilter,0,1,3);
+    });
     //is an array (rpp) of arrays (rows) of objects
     //every object contains the data and its metadata
-    var arr_meta_data_table_buttons = _.map(matrix_meta_data, function (value, key) {
-        return (_.map(matrix_meta_data[key], function (value2, key2) {
+    var arr_meta_data_table_buttons = _.map(matrix_meta_data_filtered, function (value, key) {
+        return (_.map(matrix_meta_data_filtered[key], function (value2, key2) {
             return  '<div class="col-md-4 matriz">' + printPrincipal(value2) + '</div>';
         })
                 )
