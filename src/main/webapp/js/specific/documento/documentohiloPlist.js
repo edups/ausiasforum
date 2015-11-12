@@ -36,6 +36,8 @@ documentohiloPlist.prototype.loadButtons = function (rowValues, strClass) {
     botonera += '<a class="btn btn-default view" id="' + rowValues[0].data + '"  href="#/' + strClass + '/view/' + rowValues[0].data + '"><i class="glyphicon glyphicon-eye-open"></i></a>';
     botonera += '<a class="btn btn-default edit" id="' + rowValues[0].data + '"  href="#/' + strClass + '/edit/' + rowValues[0].data + '"><i class="glyphicon glyphicon-pencil"></i></a>';
     botonera += '<a class="btn btn-default remove" id="' + rowValues[0].data + '"  href="#/' + strClass + '/remove/' + rowValues[0].data + '"><i class="glyphicon glyphicon-remove"></i></a>';
+    //provisional para crear nuevo, hasta que decidamos donde añadirlo
+    botonera += '<a class="btn btn-default cbo" id="' + rowValues[0].data + '"  href="#/'+strClass+'/hilonew/i"><i class="fa fa-github fa-1x"></i></a>';
     botonera += '<a class="btn btn-default cbo" id="' + rowValues[0].data + '"  href="#/post/plist/rpp=10&vf=10&systemfilter=obj_documento&systemfilteroperator=equals&systemfiltervalue=' + rowValues[0].data + '"><i class="fa fa-gamepad fa-1x"></i></a>';
     botonera += '</div></div>';
     return botonera;
@@ -72,7 +74,7 @@ documentohiloPlist.prototype.getHeaderPageTableFunc = function (jsonMeta, strOb,
                     + thisObject.loadThButtons(oMeta, strOb, UrlFromParamsWithoutOrder)
                     + '</div>';
         } else {
-            return  '<div class="col-md-3 CabeceraCuerpo">'
+            return  '<div class="col-md-3 cabeceraCuerpo">'
                     + oMeta.ShortName 
                     + '<br />'
                     + thisObject.loadThButtons(oMeta, strOb, UrlFromParamsWithoutOrder)
@@ -95,7 +97,7 @@ documentohiloPlist.prototype.getHeaderPageTableFunc = function (jsonMeta, strOb,
     } else {
         arr_meta_data_tableHeader_visibles_acciones = arr_meta_data_tableHeader_visibles;
     }
-    return '<div class="row">' + arr_meta_data_tableHeader_visibles_acciones.join('') + '</div>';
+    return '<div class="row cabeceraGlobal">' + arr_meta_data_tableHeader_visibles_acciones.join('') + '</div>';
 }
 documentohiloPlist.prototype.getBodyPageTableFunc = function (meta, page, printPrincipal, tdButtons_function, trPopup_function, visibles) {
     //thisObject.jsonData.message.page.list: es un array de objetos. Cada objeto contiene una fila de la tabla de la petición
@@ -142,7 +144,7 @@ documentohiloPlist.prototype.getBodyPageTableFunc = function (meta, page, printP
     //is an array (rpp) of strings 
     //where every string is a ...
     var str_meta_data_table_buttons_reduced_reduced = _.reduce(arr_meta_data_table_buttons_reduced, function (memo, num) {
-        return memo + '<div class="numero">' + num + '</div>';
+        return memo + '<div class="temapost">' + num + '</div>';
     });
     //is a string that contains the table body
     return str_meta_data_table_buttons_reduced_reduced;
