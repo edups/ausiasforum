@@ -58,13 +58,19 @@ documentohiloPlist.prototype.getHeaderPageTableFunc = function (jsonMeta, strOb,
     
     arr_meta_data_tableHeader = _.map(arr_meta_data_tableHeader_filtered, function (oMeta, key) {
         if (oMeta.IsId) {
-            return '<div class="col-md-8">'
+            return '<div class="col-md-1">'
+                    + oMeta.UltraShortName
+                    + '<br />'
+                    + thisObject.loadThButtons(oMeta, strOb, UrlFromParamsWithoutOrder)
+                    + '</div>';
+        } else if (oMeta.Name == "titulo") {
+            return '<div class="col-md-6 cabeceraTitulo">'
                     + oMeta.UltraShortName
                     + '<br />'
                     + thisObject.loadThButtons(oMeta, strOb, UrlFromParamsWithoutOrder)
                     + '</div>';
         } else {
-            return  '<div class="col-md-2">'
+            return  '<div class="col-md-3 CabeceraCuerpo">'
                     + oMeta.UltraShortName 
                     + '<br />'
                     + thisObject.loadThButtons(oMeta, strOb, UrlFromParamsWithoutOrder)
@@ -78,7 +84,7 @@ documentohiloPlist.prototype.getHeaderPageTableFunc = function (jsonMeta, strOb,
     
     //visibles
     if (visibles) {
-        arr_meta_data_tableHeader_visibles = arr_meta_data_tableHeader.slice(0, parseInt(visibles));
+        arr_meta_data_tableHeader_visibles = arr_meta_data_tableHeader.slice(1, parseInt(visibles));
     } else {
         arr_meta_data_tableHeader_visibles = arr_meta_data_tableHeader;
     }
@@ -105,10 +111,22 @@ documentohiloPlist.prototype.getBodyPageTableFunc = function (meta, page, printP
     //every object contains the data and its metadata
     var arr_meta_data_table_buttons = _.map(matrix_meta_data_filtered, function (value, key) {
         return (_.map(matrix_meta_data_filtered[key], function (value2, key2) {
-            return  '<div class="col-md-4 matriz">' + printPrincipal(value2) + '</div>';
+//            return  
+            
+         if(value2.meta.Name == "titulo"){   
+                return  '<div class="col-md-6 titulo">'
+                        + printPrincipal(value2)
+                        +'</div>'
+            }else{
+                
+                return '<div class="col-md-3 matriz">' 
+                       + printPrincipal(value2) 
+                       + '</div>';
+            }
+        
         })
                 )
-                .slice(0, parseInt(visibles))
+                .slice(1, parseInt(visibles))
                 .concat(['<div class="botns">' + tdButtons_function(value, strOb) + '</div>']);
     });
     //is an array (rpp) of arrays (rows) of strings
