@@ -40,8 +40,10 @@ documentohiloPlist.prototype.loadButtons = function (rowValues, strClass) {
     botonera += '</div></div>';
     return botonera;
 };
-
-
+//Botones Ordenado
+documentohiloPlist.prototype.loadThButtons = function (meta, strClase, UrlFromParamsWithoutOrder) {
+    return button.getTableHeaderButtons(meta.Name, strClase, 'hiloplist', UrlFromParamsWithoutOrder);
+}
 documentohiloPlist.prototype.getHeaderPageTableFunc = function (jsonMeta, strOb, UrlFromParamsWithoutOrder, visibles, acciones) {
     thisObject = this;
     acciones = typeof (acciones) != 'undefined' ? acciones : true;
@@ -65,13 +67,13 @@ documentohiloPlist.prototype.getHeaderPageTableFunc = function (jsonMeta, strOb,
                     + '</div>';
         } else if (oMeta.Name == "titulo") {
             return '<div class="col-md-6 cabeceraTitulo">'
-                    + oMeta.UltraShortName
+                    + oMeta.ShortName
                     + '<br />'
                     + thisObject.loadThButtons(oMeta, strOb, UrlFromParamsWithoutOrder)
                     + '</div>';
         } else {
             return  '<div class="col-md-3 CabeceraCuerpo">'
-                    + oMeta.UltraShortName 
+                    + oMeta.ShortName 
                     + '<br />'
                     + thisObject.loadThButtons(oMeta, strOb, UrlFromParamsWithoutOrder)
                     + '</div>';

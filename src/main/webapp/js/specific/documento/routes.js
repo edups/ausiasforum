@@ -113,7 +113,8 @@ function fDocumentoRoutes() {
     });
     //--------------------------------------------------------------------------
     Path.map("#/" + strClass + "/hiloplist(/:url)").to(function () {
-        header.empty().append(fillDocumentoPageHeader('Lista paginada de hilos'));
+        var fillDocumentoPageHeader = _.partial(html.getPageHeader, icon, 'Foro', _);
+        header.empty().append(fillDocumentoPageHeader('Temas'));
         var strParam = parameter.getUrlObjectFromUrlString(this.params['url']);
         ausiasFLOW.reset();
         ausiasFLOW.initialize(documentohiloPlist, content, strClass, 'plist', strParam);

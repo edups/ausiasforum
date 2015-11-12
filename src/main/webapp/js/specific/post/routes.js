@@ -78,7 +78,7 @@ function fPostRoutes() {
     Path.map("#/" + strClass + "/plist(/:url)").to(function () {
 //        $( "<style>background-color: black;</style>" ).appendTo( content );
 //           var myEstilo ="paquito.css";
-           $('<link href="css/specific/paquito.css" rel="stylesheet" type="text/css"/>').appendTo("head");
+        $('<link href="css/specific/paquito.css" rel="stylesheet" type="text/css"/>').appendTo("head");
         header.empty().append(fillDocumentoPageHeader('Paginated List'));
         var strParam = parameter.getUrlObjectFromUrlString(this.params['url']);
         ausiasFLOW.reset();
