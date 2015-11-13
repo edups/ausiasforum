@@ -38,8 +38,6 @@
 
         <title>ausiàsBROTH</title>
 
-        <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-
         <!-- 
         <link href="css/bootstrap/sb-admin.css" rel="stylesheet">
         <link rel="stylesheet" href="css/jquery-ui.css"> 
@@ -47,14 +45,14 @@
         <link rel="stylesheet" href="css/plugins/morris.css" />
         -->
 
-        <link href="vendor/bootstrap-datetimepicker/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css"/>
-
-
-        <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
-        <link href="css/main/main.css" rel="stylesheet" type="text/css">
-        <link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
-        <link href='http://fonts.googleapis.com/css?family=Questrial' rel='stylesheet' type='text/css'>
-
+        <!--
+                <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+                <link href="vendor/bootstrap-datetimepicker/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css"/>
+                <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+                <link href="css/main/main.css" rel="stylesheet" type="text/css">
+                <link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
+                <link href='http://fonts.googleapis.com/css?family=Questrial' rel='stylesheet' type='text/css'>
+        -->
         <!-- Custom Fonts -->
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -206,6 +204,14 @@
         <!-- --------------------------------------------------------------- -->
         <script type="text/javascript">
             function resetCSS() {
+                $('link[rel="stylesheet"]').each(function () {
+                    this.remove();
+                })
+                $('<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>').appendTo("head");
+                $('<link href="vendor/bootstrap-datetimepicker/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css"/>').appendTo("head");
+                $('<link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>').appendTo("head");
+                $('<link href="http://fonts.googleapis.com/css?family=Oswald" rel="stylesheet" type="text/css"/>').appendTo("head");
+                $('<link href="http://fonts.googleapis.com/css?family=Questrial" rel="stylesheet" type="text/css"/>').appendTo("head");
                 $('<link href="css/main/main.css" rel="stylesheet" type="text/css"/>').appendTo("head");
             }
             function loadRoutes() {
@@ -217,6 +223,7 @@
                 fPostRoutes();
             }
             $(document).ready(function () {
+                resetCSS();
                 configuration.pathConfig();
                 $('.broth_show_when_logged_in').hide();
                 $('.broth_show_when_logged_out').show();

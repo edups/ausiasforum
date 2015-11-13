@@ -37,7 +37,7 @@ documentohiloPlist.prototype.loadButtons = function (rowValues, strClass) {
     botonera += '<a class="btn btn-default edit" id="' + rowValues[0].data + '"  href="#/' + strClass + '/edit/' + rowValues[0].data + '"><i class="glyphicon glyphicon-pencil"></i></a>';
     botonera += '<a class="btn btn-default remove" id="' + rowValues[0].data + '"  href="#/' + strClass + '/remove/' + rowValues[0].data + '"><i class="glyphicon glyphicon-remove"></i></a>';
     //provisional para crear nuevo, hasta que decidamos donde añadirlo
-    botonera += '<a class="btn btn-default cbo" id="' + rowValues[0].data + '"  href="#/'+strClass+'/hilonew/i"><i class="fa fa-github fa-1x"></i></a>';
+    botonera += '<a class="btn btn-default cbo" id="' + rowValues[0].data + '"  href="#/'+strClass+'/hilonew"><i class="fa fa-plus fa-1x"></i></a>';
     botonera += '<a class="btn btn-default cbo" id="' + rowValues[0].data + '"  href="#/post/plist/rpp=10&vf=10&systemfilter=obj_documento&systemfilteroperator=equals&systemfiltervalue=' + rowValues[0].data + '"><i class="fa fa-gamepad fa-1x"></i></a>';
     botonera += '</div></div>';
     return botonera;
@@ -68,13 +68,13 @@ documentohiloPlist.prototype.getHeaderPageTableFunc = function (jsonMeta, strOb,
                     + thisObject.loadThButtons(oMeta, strOb, UrlFromParamsWithoutOrder)
                     + '</div>';
         } else if (oMeta.Name == "titulo") {
-            return '<div class="col-md-6 cabeceraTitulo">'
+            return '<div class="col-md-8 cabeceraTitulo">'
                     + oMeta.ShortName
                     + '<br />'
                     + thisObject.loadThButtons(oMeta, strOb, UrlFromParamsWithoutOrder)
                     + '</div>';
         } else {
-            return  '<div class="col-md-3 cabeceraCuerpo">'
+            return  '<div class="col-md-2 cabeceraCuerpo">'
                     + oMeta.ShortName 
                     + '<br />'
                     + thisObject.loadThButtons(oMeta, strOb, UrlFromParamsWithoutOrder)
@@ -118,12 +118,12 @@ documentohiloPlist.prototype.getBodyPageTableFunc = function (meta, page, printP
 //            return  
             
          if(value2.meta.Name == "titulo"){   
-                return  '<div class="col-md-6 titulo">'
+                return  '<div class="col-md-8 titulo">'
                         + printPrincipal(value2)
                         +'</div>'
             }else{
                 
-                return '<div class="col-md-3 matriz">' 
+                return '<div class="col-md-2 matriz">' 
                        + printPrincipal(value2) 
                        + '</div>';
             }
