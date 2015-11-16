@@ -37,7 +37,7 @@ documentohiloPlist.prototype.loadButtons = function (rowValues, strClass) {
     botonera += '<a class="btn btn-default edit" id="' + rowValues[0].data + '"  href="#/' + strClass + '/edit/' + rowValues[0].data + '"><i class="glyphicon glyphicon-pencil"></i></a>';
     botonera += '<a class="btn btn-default remove" id="' + rowValues[0].data + '"  href="#/' + strClass + '/remove/' + rowValues[0].data + '"><i class="glyphicon glyphicon-remove"></i></a>';
     //provisional para crear nuevo, hasta que decidamos donde añadirlo
-    botonera += '<a class="btn btn-default cbo" id="' + rowValues[0].data + '"  href="#/'+strClass+'/hilonew"><i class="fa fa-plus fa-1x"></i></a>';
+    botonera += '<a class="btn btn-default cbo" id="' + rowValues[0].data + '"  href="#/' + strClass + '/hilonew"><i class="fa fa-plus fa-1x"></i></a>';
     botonera += '<a class="btn btn-default cbo" id="' + rowValues[0].data + '"  href="#/post/plist/rpp=10&vf=10&systemfilter=obj_documento&systemfilteroperator=equals&systemfiltervalue=' + rowValues[0].data + '"><i class="fa fa-gamepad fa-1x"></i></a>';
     botonera += '</div></div>';
     return botonera;
@@ -46,20 +46,56 @@ documentohiloPlist.prototype.loadButtons = function (rowValues, strClass) {
 documentohiloPlist.prototype.loadThButtons = function (meta, strClase, UrlFromParamsWithoutOrder) {
     return button.getTableHeaderButtons(meta.Name, strClase, 'hiloplist', UrlFromParamsWithoutOrder);
 }
+
+//    documentohiloPlist.prototype.printValue = function (value) {
+//        switch (value.meta.Type) {
+//            case 'Boolean':
+//                if (value.data == true) {
+//                    return html.getIcon('glyphicon-ok');
+//                } else {
+//                    return html.getIcon('glyphicon-remove');
+//                }
+//                break;
+//            default:
+//                return html.print(value.data);
+//        }
+//    };
+//    documentohiloPlist.prototype.printPrincipal = function (value) {
+//        if (value.meta) {
+//            if (value.meta.IsObjForeignKey) {
+//                return  html.printObject2(value.meta.ReferencesTable, value.data.meta, value.data.bean);
+//            } else {
+//                return   html.printValue(value);
+//            }
+//        } else {
+//            return html.print(value);
+//        }
+//    }
+//    documentohiloPlist.prototype.miClipString = function (strResult, charsToClipStart) {
+//        charsToClipStart = string.defaultizeValue(charsToClipStart, 40);
+//        if (typeof strResult === 'string') {
+//            if (strResult.length > charsToClipStart)
+//                return strResult.substr(0, charsToClipStart).trim() + " ...";
+//            else
+//                return strResult.trim();
+//        } else {
+//            return strResult;
+//        }
+//    }
+
+
+
 documentohiloPlist.prototype.getHeaderPageTableFunc = function (jsonMeta, strOb, UrlFromParamsWithoutOrder, visibles, acciones) {
     thisObject = this;
     acciones = typeof (acciones) != 'undefined' ? acciones : true;
-    
-     arr_meta_data_tableHeader_filtered = _.filter(jsonMeta, function(oItem){
-        if (oItem.Name=="id" || oItem.Name=="titulo" || oItem.Name=="alta") {
+
+    arr_meta_data_tableHeader_filtered = _.filter(jsonMeta, function (oItem) {
+        if (oItem.Name == "id" || oItem.Name == "titulo" || oItem.Name == "alta") {
             return true;
         } else {
             return false;
         }
-    } );
-
-
-    
+    });
     arr_meta_data_tableHeader = _.map(arr_meta_data_tableHeader_filtered, function (oMeta, key) {
         if (oMeta.IsId) {
             return '<div class="col-md-1">'
@@ -68,24 +104,24 @@ documentohiloPlist.prototype.getHeaderPageTableFunc = function (jsonMeta, strOb,
                     + thisObject.loadThButtons(oMeta, strOb, UrlFromParamsWithoutOrder)
                     + '</div>';
         } else if (oMeta.Name == "titulo") {
-            return '<div class="col-md-8 cabeceraTitulo">'
+            return '<div class="col-md-7 col-md-offset-1 cabeceraTitulo">'
                     + oMeta.ShortName
                     + '<br />'
                     + thisObject.loadThButtons(oMeta, strOb, UrlFromParamsWithoutOrder)
                     + '</div>';
         } else {
             return  '<div class="col-md-2 cabeceraCuerpo">'
-                    + oMeta.ShortName 
+                    + oMeta.ShortName
                     + '<br />'
                     + thisObject.loadThButtons(oMeta, strOb, UrlFromParamsWithoutOrder)
                     + '</div>';
         }
     });
-    
 
-   
-    
-    
+
+
+
+
     //visibles
     if (visibles) {
         arr_meta_data_tableHeader_visibles = arr_meta_data_tableHeader.slice(1, parseInt(visibles));
@@ -108,30 +144,37 @@ documentohiloPlist.prototype.getBodyPageTableFunc = function (meta, page, printP
         });
     });
     //Filtra los campos del array de objetos recogiendo los que son necesarios en nuestro caso
-    matrix_meta_data_filtered = _.map(matrix_meta_data,function(oFilter){
-        return _.pick(oFilter,0,1,3);
+    matrix_meta_data_filtered = _.map(matrix_meta_data, function (oFilter) {
+        return _.pick(oFilter, 0, 1, 3);
     });
     //is an array (rpp) of arrays (rows) of objects
     //every object contains the data and its metadata
     var arr_meta_data_table_buttons = _.map(matrix_meta_data_filtered, function (value, key) {
         return (_.map(matrix_meta_data_filtered[key], function (value2, key2) {
 //            return  
-            
-         if(value2.meta.Name == "titulo"){   
-                return  '<div class="col-md-8 titulo">'
+
+            if (value2.meta.Name == "titulo") {
+                return         '<div class="post">'
+                        + '<div class="col-md-1 icono">'
+                        + '<i class="fa fa-list-alt fa-2x"></i>'
+
+                        + '</div>'
+
+                        + '<div class="col-md-7 titulo">'
+
                         + printPrincipal(value2)
-                        +'</div>'
-            }else{
-                
-                return '<div class="col-md-2 matriz">' 
-                       + printPrincipal(value2) 
-                       + '</div>';
+                        + '</div>'
+            } else {
+
+                return '<div class="col-md-2 matriz">'
+                        + printPrincipal(value2)
+                        + '</div>';
             }
-        
+
         })
                 )
                 .slice(1, parseInt(visibles))
-                .concat(['<div class="botns">' + tdButtons_function(value, strOb) + '</div>']);
+                .concat(['<div class="botns">' + tdButtons_function(value, strOb) + '</div> </div>']);
     });
     //is an array (rpp) of arrays (rows) of strings
     //every string contains the data of the table cell

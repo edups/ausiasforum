@@ -113,6 +113,7 @@ function fDocumentoRoutes() {
     });
     //--------------------------------------------------------------------------
     Path.map("#/" + strClass + "/hiloplist(/:url)").to(function () {
+        $('<link href="http://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css"/>').appendTo("head");
         $('<link href="css/specific/documentohiloplist.css" rel="stylesheet" type="text/css"/>').appendTo("head");
         var fillDocumentoPageHeader = _.partial(html.getPageHeader, icon, 'Foro', _);
         header.empty().append(fillDocumentoPageHeader('Temas'));
@@ -122,7 +123,7 @@ function fDocumentoRoutes() {
         return false;
     });
     Path.map("#/" + strClass + "/hilonew(/:url)").to(function () {
-        header.empty().append(fillDocumentoPageHeader('MIEW'));
+        header.empty().append(fillDocumentoPageHeader('NEW HILO'));
         var strParam = parameter.getUrlObjectFromUrlString(this.params['url']);
         ausiasFLOW.reset();
         ausiasFLOW.initialize(documentohiloNew, content, strClass, 'new', strParam);

@@ -22,10 +22,12 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 @charset "UTF-8";
 
  body{
-    background-color:  #222;
+      background: -webkit-linear-gradient(to left, #c2e59c , #64b3f4);
+        background: linear-gradient(to left, #c2e59c , #64b3f4); 
 }
 #broth_panel_heading{
-    background-color: springgreen;
+   background: -webkit-linear-gradient(to right, #16222A , #3A6073);
+    background: linear-gradient(to right, #16222A , #3A6073); 
 }
 #broth_title{
     text-align: center;
@@ -40,15 +42,29 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
     background-color: #337ab7 ;
 }*/
 .cabeceraGlobal{
-     background-color: #337ab7 ;
+     background-color:#C0C0C0; 
      border: 1px solid black;
      font-weight: bolder;
+     border-radius: 5px;
+     
 }
-.temapost{
+/*.temapost{
      border: 1px solid black;
-     border-radius: 10px;
+     border-radius: 5px;
      background-color: white;
+}*/
+.post{
+     border: 1px solid black;
+     border-radius: 5px;
+     background-color: white;
+     margin-top: 10px;
+     font-family: "Montserrat";
 }
+
 .panel-body{
-    background-color:#c4e3f3;
+    background-color:#E0E0E0;
+}
+
+#broth_operationicon{
+    color: white;
 }
