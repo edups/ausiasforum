@@ -50,3 +50,5 @@ public class DocumentoDao extends TableDaoGenImpl<DocumentoBean> {
 //        return description;
 //    }
 }
+
+
