@@ -45,6 +45,8 @@ documentohiloNew.prototype = new newModule();
     }
     
 };
+
+
  documentohiloNew.prototype.doEventsLoading = function () {
    form.getForeign('documento','usuario');
    form.getForeign('documento','tipodocumento');       

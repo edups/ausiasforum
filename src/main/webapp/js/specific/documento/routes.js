@@ -123,7 +123,9 @@ function fDocumentoRoutes() {
         return false;
     });
     Path.map("#/" + strClass + "/hilonew(/:url)").to(function () {
-        header.empty().append(fillDocumentoPageHeader('NEW HILO'));
+        $('<link href="http://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css"/>').appendTo("head");
+        $('<link href="css/specific/hilonew.css" rel="stylesheet" type="text/css"/>').appendTo("head");
+        header.empty().append(fillDocumentoPageHeader('Crear un hilo nuevo'));
         var strParam = parameter.getUrlObjectFromUrlString(this.params['url']);
         ausiasFLOW.reset();
         ausiasFLOW.initialize(documentohiloNew, content, strClass, 'new', strParam);
