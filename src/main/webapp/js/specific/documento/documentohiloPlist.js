@@ -192,3 +192,57 @@ documentohiloPlist.prototype.getBodyPageTableFunc = function (meta, page, printP
     //is a string that contains the table body
     return str_meta_data_table_buttons_reduced_reduced;
 }
+
+documentohiloPlist.prototype.render = function () {
+    if (!strOb) {
+        return "error: No class defined in paginatedList module";
+    }
+    if (!paramsObject) {
+        return "error: No params defined in paginatedList module";
+    }
+    if (jsonData) {
+        if (jsonData.status != "200") {
+            return "error: Invalid status code returned by the server";
+        }
+    } else {
+        return "error: Lost server connection";
+    }
+
+    strGeneralInformation = this.informationTemplate(
+            this.getRegistersInfo(jsonData.message.registers.message) + this.getOrderInfo(paramsObject) + this.getFilterInfo(paramsObject),
+            pagination.getPageLinks(urlWithoutPage, parseInt(paramsObject["page"]), parseInt(jsonData.message.pages.message), 2),
+            pagination.getRppLinks(urlWithoutRpp, paramsObject['rpp'])
+            );
+    strVisibleFields = this.visibleFieldsTemplate();
+    strFilterForm = this.filterFormTemplate();
+    strFilterFormClient = this.filterFormClientTemplate();
+    strNewButton = this.newTemplate(strOb);
+    //console.log(this.loadButtons('2','1'))   //??
+
+    strTable = table.getTable(
+            this.getHeaderPageTableFunc(jsonData.message.meta.message, strOb, strUrlFromParamsWithoutOrder, paramsObject.vf),
+            this.getBodyPageTableFunc(jsonData.message.meta.message, jsonData.message.page.message, html.printPrincipal, this.loadButtons, this.loadPopups, paramsObject.vf)
+            );
+    return tab.getTab([
+//        {'name': 'Consulta', 'content': strGeneralInformation},
+//        {'name': 'Campos visibles', 'content': strVisibleFields},
+//        {'name': 'Filtro de servidor', 'content': strFilterForm},
+        {'name': 'Indice de temas', 'content': strFilterFormClient}
+//        {'name': 'Nuevo registro', 'content': strNewButton}
+    ]) + '<div id="tablePlace">' + strTable + '</div>';
+};
+
+documentohiloPlist.prototype.filterFormClientTemplate = function () {
+    return (
+            dom.div('class="row"',
+                    dom.div('class="col-md-12"',
+                            dom.p('',
+                                    dom.form('class="navbar-form navbar-right" role="form" action="Controller" method="post" id="empresaForm"',
+                                            dom.input('id="inputFiltervalueClient" class="form-control" name="filtervalue" type="text" size="20" maxlength="50" value=""  width="100" style="width: 140px" placeholder="Buscar ..."') +
+                                            dom.input('type="submit" class="btn" id="btnFiltrarClient" name="btnFiltrarClient" value="Buscar"')
+                                            )
+                                    )
+                            )
+                    )
+            );
+}
