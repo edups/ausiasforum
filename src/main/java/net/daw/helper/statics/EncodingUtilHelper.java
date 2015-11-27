@@ -1,0 +1,101 @@
+/*
+ * Copyright (c) 2015 by Rafael Angel Aznar Aparici (rafaaznar at gmail dot com)
+ * 
+ * openAUSIAS: The stunning micro-library that helps you to develop easily 
+ *             AJAX web applications by using Java and jQuery
+ * openAUSIAS is distributed under the MIT License (MIT)
+ * Sources at https://github.com/rafaelaznar/openAUSIAS
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ */
+
+/**
+ * Utility class for JavaScript compatible UTF-8 encoding and decoding.
+ *
+ * @see
+ * http://stackoverflow.com/questions/607176/java-equivalent-to-javascripts-encodeuricomponent-that-produces-identical-output
+ * @author John Topley
+ */
+package net.daw.helper.statics;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
+
+public class EncodingUtilHelper {
+
+    /**
+     * Decodes the passed UTF-8 String using an algorithm that's compatible with
+     * JavaScript's <code>decodeURIComponent</code> function. Returns
+     * <code>null</code> if the String is <code>null</code>.
+     *
+     * @param s The UTF-8 encoded String to be decoded
+     * @return the decoded String
+     */
+    public static String decodeURIComponent(String s) {
+        if (s == null) {
+            return null;
+        }
+
+        String result = null;
+
+        try {
+            result = URLDecoder.decode(s, "UTF-8");
+        } // This exception should never occur.
+        catch (UnsupportedEncodingException e) {
+            result = s;
+        }
+
+        return result;
+    }
+
+    /**
+     * Encodes the passed String as UTF-8 using an algorithm that's compatible
+     * with JavaScript's <code>encodeURIComponent</code> function. Returns
+     * <code>null</code> if the String is <code>null</code>.
+     *
+     * @param s The String to be encoded
+     * @return the encoded String
+     */
+    public static String encodeURIComponent(String s) {
+        String result = null;
+
+        try {
+            result = URLEncoder.encode(s, "UTF-8")
+                    .replaceAll("\\+", "%20")
+                    .replaceAll("\\%21", "!")
+                    .replaceAll("\\%27", "'")
+                    .replaceAll("\\%28", "(")
+                    .replaceAll("\\%29", ")")
+                    .replaceAll("\\%7E", "~");
+        } // This exception should never occur.
+        catch (UnsupportedEncodingException e) {
+            result = s;
+        }
+
+        return result;
+    }
+
+    /**
+     * Private constructor to prevent this class from being instantiated.
+     */
+    private EncodingUtilHelper() {
+        super();
+    }
+}
