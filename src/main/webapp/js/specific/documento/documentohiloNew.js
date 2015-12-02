@@ -45,9 +45,28 @@ documentohiloNew.prototype = new newModule();
     }
     
 };
+form2 = {
+ gethilo: function (obMain, obForeign) {
+//        $('#' + obMain + 'Form #obj_' + obForeign + '_button').unbind('click');
+//        $('#' + obMain + 'Form #obj_' + obForeign + '_button').click(function () {
+//            $('#' + obMain + 'Form').append(modal.getEmptyModal('modal01'));
+//            modal.loadModal('#modal01', modal.getModalHeader('Elección de ' + obForeign), "", modal.getModalFooter(), true);
+//            ausiasFLOW.initialize(ebpListModule, $('#modal-body'), obForeign , 'plist', {"vf": 4}, function (id) {
+                $('#obj_' + obForeign).val(1);
+                promise.getOne(obForeign, 1).done(function (json) {
+                    $('#obj_' + obForeign + '_desc').html(html.printObject2(obForeign, json.message.meta.message,json.message.bean.message));
+                });
+//                $('#modal01').modal('hide');
+//            });
+//            return false;
+//        });
 
+
+}
+}
 
  documentohiloNew.prototype.doEventsLoading = function () {
-   form.getForeign('documento','usuario');
-   form.getForeign('documento','tipodocumento');       
+   form.getForeign('documento','usuario'); 
+   form2.gethilo('documento','tipodocumento');     
+   
 };

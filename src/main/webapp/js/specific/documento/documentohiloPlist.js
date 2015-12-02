@@ -33,9 +33,9 @@ documentohiloPlist.prototype = new pListModule();
 documentohiloPlist.prototype.loadButtons = function (rowValues, strClass) {
     var botonera = "";
     botonera += '<div class="btn-toolbar" role="toolbar"><div class="btn-group btn-group-xs">';
-    botonera += '<a class="btn btn-default view" id="' + rowValues[0].data + '"  href="#/' + strClass + '/view/' + rowValues[0].data + '"><i class="glyphicon glyphicon-eye-open"></i></a>';
-    botonera += '<a class="btn btn-default edit" id="' + rowValues[0].data + '"  href="#/' + strClass + '/edit/' + rowValues[0].data + '"><i class="glyphicon glyphicon-pencil"></i></a>';
-    botonera += '<a class="btn btn-default remove" id="' + rowValues[0].data + '"  href="#/' + strClass + '/remove/' + rowValues[0].data + '"><i class="glyphicon glyphicon-remove"></i></a>';
+//    botonera += '<a class="btn btn-default view" id="' + rowValues[0].data + '"  href="#/' + strClass + '/view/' + rowValues[0].data + '"><i class="glyphicon glyphicon-eye-open"></i></a>';
+//    botonera += '<a class="btn btn-default edit" id="' + rowValues[0].data + '"  href="#/' + strClass + '/edit/' + rowValues[0].data + '"><i class="glyphicon glyphicon-pencil"></i></a>';
+//    botonera += '<a class="btn btn-default remove" id="' + rowValues[0].data + '"  href="#/' + strClass + '/remove/' + rowValues[0].data + '"><i class="glyphicon glyphicon-remove"></i></a>';
     //provisional para crear nuevo, hasta que decidamos donde añadirlo
     botonera += '<a class="btn btn-default cbo" id="' + rowValues[0].data + '"  href="#/' + strClass + '/hilonew"><i class="fa fa-plus fa-1x"></i></a>';
     botonera += '<a class="btn btn-default cbo" id="' + rowValues[0].data + '"  href="#/post/plist/rpp=10&vf=10&systemfilter=obj_documento&systemfilteroperator=equals&systemfiltervalue=' + rowValues[0].data + '"><i class="fa fa-gamepad fa-1x"></i></a>';
@@ -111,7 +111,8 @@ documentohiloPlist.prototype.getHeaderPageTableFunc = function (jsonMeta, strOb,
                     + '</div>';
         } else {
             return  '<div class="col-md-2 cabeceraCuerpo">'
-                    + oMeta.ShortName
+//                    + oMeta.ShortName
+                    + 'Fecha de Creación'
                     + '<br />'
                     + thisObject.loadThButtons(oMeta, strOb, UrlFromParamsWithoutOrder)
                     + '</div>';
@@ -144,7 +145,7 @@ documentohiloPlist.prototype.getBodyPageTableFunc = function (meta, page, printP
         });
     });
     //Filtra los campos del array de objetos recogiendo los que son necesarios en nuestro caso
-    matrix_meta_data_filtered = _.map(matrix_meta_data, function (oFilter) {
+     matrix_meta_data_filtered = _.map(matrix_meta_data, function (oFilter) {
         return _.pick(oFilter, 0, 1, 3);
     });
     //is an array (rpp) of arrays (rows) of objects
