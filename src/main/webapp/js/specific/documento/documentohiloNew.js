@@ -33,7 +33,7 @@ documentohiloNew.prototype = new newModule();
     documentohiloNew.prototype.render = function () {
     if (jsonData.status == "200") {
      jsonData_filtered = _.filter(jsonData.message, function(oItem){
-        if (oItem.Name=="id" || oItem.Name=="titulo" || oItem.Name=="alta"|| oItem.Name =="obj_tipodocumento") {
+        if (oItem.Name=="id" || oItem.Name=="titulo" || oItem.Name =="obj_tipodocumento") {
             return true;
         } else {
             return false;
