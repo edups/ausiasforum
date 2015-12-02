@@ -26,14 +26,19 @@
  */
 package net.daw.service.specific.implementation;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import net.daw.service.generic.implementation.TableServiceGenImpl;
 import java.sql.Connection;
+import java.util.HashMap;
+import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import net.daw.bean.specific.implementation.DocumentoBean;
 import net.daw.connection.implementation.BoneConnectionPoolImpl;
 import net.daw.dao.specific.implementation.DocumentoDao;
 import net.daw.helper.statics.AppConfigurationHelper;
+import net.daw.helper.statics.ParameterCook;
 
 public class DocumentoService extends TableServiceGenImpl {
 
@@ -58,4 +63,30 @@ public class DocumentoService extends TableServiceGenImpl {
         oConnection.close();
         return "{\"data\":\"" + oDocumentoBean.getContenido() + "\"}";
     }
+    
+     @Override
+    public String set() throws Exception {
+
+        Connection oConnection = new BoneConnectionPoolImpl().newConnection();
+        DocumentoDao oDocumentoDao = new DocumentoDao(oConnection);
+        DocumentoBean oDocumentoBean = new DocumentoBean();
+        String json = ParameterCook.prepareJson(oRequest);
+        Gson gson = new GsonBuilder().setDateFormat("dd/MM/yyyy").excludeFieldsWithoutExposeAnnotation().create();
+        /*oProfesorBean.setId(2);
+         oProfesorBean.setNombre("julio");
+         oProfesorBean.setEstado("the best");*/
+        oDocumentoBean = gson.fromJson(json, DocumentoBean.class);
+        oDocumentoBean = oDocumentoDao.set(oDocumentoBean);
+        Map<String, String> data = new HashMap<>();
+        data.put("status", "200");
+        data.put("message", Integer.toString(oDocumentoBean.getId()));
+        String resultado = gson.toJson(data);
+        return resultado;
+    }
+    
+    
+    
+    
+    
+    
 }

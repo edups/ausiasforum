@@ -28,7 +28,10 @@ package net.daw.dao.specific.implementation;
 
 import net.daw.dao.generic.implementation.TableDaoGenImpl;
 import java.sql.Connection;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import net.daw.bean.specific.implementation.DocumentoBean;
+import net.daw.data.specific.implementation.MysqlDataSpImpl;
 
 public class DocumentoDao extends TableDaoGenImpl<DocumentoBean> {
 
@@ -49,6 +52,34 @@ public class DocumentoDao extends TableDaoGenImpl<DocumentoBean> {
 //        description += " (" + oDocumentoBean.getHits().toString() + " hits)";
 //        return description;
 //    }
+    
+    
+    
+    @Override
+    public DocumentoBean set(DocumentoBean oDocumentoBean) throws Exception {
+
+        MysqlDataSpImpl oMysql = new MysqlDataSpImpl(oConnection);
+
+        try {
+            if (oDocumentoBean.getId() == 0) {
+                oDocumentoBean.setId(oMysql.insertOne(strTableOrigin));
+            }
+            oMysql.updateOne(oDocumentoBean.getId(), strTableOrigin, "titulo", oDocumentoBean.getTitulo().toString());
+            oMysql.updateOne(oDocumentoBean.getId(), strTableOrigin, "id_tipodocumento", oDocumentoBean.getId_tipodocumento().toString());
+            //se pone la fecha y hora del edit 
+            Date date = new Date();
+            //BUG FECHAS SOLUCIONADO
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            oDocumentoBean.setAlta(date);
+            String str_fecha = formatter.format(oDocumentoBean.getAlta());
+            
+            oMysql.updateOne(oDocumentoBean.getId(), strTableOrigin, "alta", str_fecha);
+        } catch (Exception e) {
+            throw new Exception(this.getClass().getName() + ".set: Error: " + e.getMessage());
+        }
+        return oDocumentoBean;
+    }
+    
 }
 
 
