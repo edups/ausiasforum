@@ -96,7 +96,7 @@ public class UsuarioService extends TableServiceGenImpl {
         if (oUserBean == null) {
             return JsonMessage.getJsonMsg("403", "ERROR: You don't have permission to perform this operation");
         } else {
-            return JsonMessage.getJsonMsg("200", oUserBean.getLogin());
+            return "{\"status\":200,\"message\":{\"id\":" + oUserBean.getId()+ ",\"login\":"+oUserBean.getLogin()+"}";
         }
     }
 

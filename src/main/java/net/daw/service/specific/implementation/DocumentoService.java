@@ -72,9 +72,7 @@ public class DocumentoService extends TableServiceGenImpl {
         DocumentoBean oDocumentoBean = new DocumentoBean();
         String json = ParameterCook.prepareJson(oRequest);
         Gson gson = new GsonBuilder().setDateFormat("dd/MM/yyyy").excludeFieldsWithoutExposeAnnotation().create();
-        /*oProfesorBean.setId(2);
-         oProfesorBean.setNombre("julio");
-         oProfesorBean.setEstado("the best");*/
+
         oDocumentoBean = gson.fromJson(json, DocumentoBean.class);
         oDocumentoBean = oDocumentoDao.set(oDocumentoBean);
         Map<String, String> data = new HashMap<>();
