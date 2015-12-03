@@ -26,8 +26,19 @@
  */
 package net.daw.service.specific.implementation;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import java.sql.Connection;
+import java.util.HashMap;
+import java.util.Map;
 import net.daw.service.generic.implementation.TableServiceGenImpl;
 import javax.servlet.http.HttpServletRequest;
+import net.daw.bean.specific.implementation.DocumentoBean;
+import net.daw.bean.specific.implementation.PostBean;
+import net.daw.connection.implementation.BoneConnectionPoolImpl;
+import net.daw.dao.specific.implementation.DocumentoDao;
+import net.daw.dao.specific.implementation.PostDao;
+import net.daw.helper.statics.ParameterCook;
 
 
 public class PostService extends TableServiceGenImpl {
@@ -35,4 +46,24 @@ public class PostService extends TableServiceGenImpl {
     public PostService(HttpServletRequest request) {
         super(request);
     }
+    
+    @Override
+    public String set() throws Exception {
+
+        Connection oConnection = new BoneConnectionPoolImpl().newConnection();
+        PostDao oPostDao = new PostDao(oConnection);
+        PostBean oPostBean = new PostBean();
+        String json = ParameterCook.prepareJson(oRequest);
+        Gson gson = new GsonBuilder().setDateFormat("dd/MM/yyyy").excludeFieldsWithoutExposeAnnotation().create();
+        
+        oPostBean = gson.fromJson(json, PostBean.class);
+        oPostBean = oPostDao.set(oPostBean);
+        Map<String, String> data = new HashMap<>();
+        data.put("status", "200");
+        data.put("message", Integer.toString(oPostBean.getId()));
+        String resultado = gson.toJson(data);
+        return resultado;
+    }
+    
+    
 }
