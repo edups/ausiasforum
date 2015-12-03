@@ -28,7 +28,11 @@ package net.daw.dao.specific.implementation;
 
 import net.daw.dao.generic.implementation.TableDaoGenImpl;
 import java.sql.Connection;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import net.daw.bean.specific.implementation.DocumentoBean;
 import net.daw.bean.specific.implementation.PostBean;
+import net.daw.data.specific.implementation.MysqlDataSpImpl;
 
 public class PostDao extends TableDaoGenImpl<PostBean> {
 
@@ -37,4 +41,31 @@ public class PostDao extends TableDaoGenImpl<PostBean> {
     }
 
 
+    @Override
+    public PostBean set(PostBean oPostBean) throws Exception {
+
+        MysqlDataSpImpl oMysql = new MysqlDataSpImpl(oConnection);
+
+        try {
+            if (oPostBean.getId() == 0) {
+                oPostBean.setId(oMysql.insertOne(strTableOrigin));
+            }
+            oMysql.updateOne(oPostBean.getId(), strTableOrigin, "mensaje", oPostBean.getMensaje().toString());
+            oMysql.updateOne(oPostBean.getId(), strTableOrigin, "id_documento", oPostBean.getId_documento().toString());
+            oMysql.updateOne(oPostBean.getId(), strTableOrigin, "id_usuario", oPostBean.getId_usuario().toString());
+
+            //se pone la fecha y hora del edit 
+            Date date = new Date();
+            //BUG FECHAS SOLUCIONADO
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            oPostBean.setFecha(date);
+            String str_fecha = formatter.format(oPostBean.getFecha());
+            
+            oMysql.updateOne(oPostBean.getId(), strTableOrigin, "fecha", str_fecha);
+        } catch (Exception e) {
+            throw new Exception(this.getClass().getName() + ".set: Error: " + e.getMessage());
+        }
+        return oPostBean;
+    }
+    
 }
