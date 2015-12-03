@@ -95,3 +95,112 @@ postPlist.prototype.getBodyPageTableFunc = function (meta, page, printPrincipal,
     //is a string that contains the table body
     return str_meta_data_table_buttons_reduced_reduced;
 }
+
+
+postPlist.prototype.render = function () {
+    if (!strOb) {
+        return "error: No class defined in paginatedList module";
+    }
+    if (!paramsObject) {
+        return "error: No params defined in paginatedList module";
+    }
+    if (jsonData) {
+        if (jsonData.status != "200") {
+            return "error: Invalid status code returned by the server";
+        }
+    } else {
+        return "error: Lost server connection";
+    }
+
+    strGeneralInformation = this.informationTemplate(
+            this.getRegistersInfo(jsonData.message.registers.message) + this.getOrderInfo(paramsObject) + this.getFilterInfo(paramsObject),
+            pagination.getPageLinks(urlWithoutPage, parseInt(paramsObject["page"]), parseInt(jsonData.message.pages.message), 2),
+            pagination.getRppLinks(urlWithoutRpp, paramsObject['rpp'])
+            );
+    strVisibleFields = this.visibleFieldsTemplate();
+    strFilterForm = this.filterFormTemplate();
+    strFilterFormClient = this.filterFormClientTemplate();
+    strNewButton = this.newTemplate(strOb);
+    //console.log(this.loadButtons('2','1'))   //??
+
+    strTable = table.getTable(
+            this.getHeaderPageTableFunc(jsonData.message.meta.message, strOb, strUrlFromParamsWithoutOrder, paramsObject.vf),
+            this.getBodyPageTableFunc(jsonData.message.meta.message, jsonData.message.page.message, html.printPrincipal, this.loadButtons, this.loadPopups, paramsObject.vf)
+            );
+    return tab.getTab([
+//        {'name': 'Consulta', 'content': strGeneralInformation},
+//        {'name': 'Campos visibles', 'content': strVisibleFields},
+//        {'name': 'Búsquedas', 'content': strFilterForm},
+        {'name': 'Búsquedas', 'content': strFilterFormClient},
+//        {'name': 'Nuevo registro', 'content': strNewButton}
+    ]) + '<div id="tablePlace">' + strTable + '</div>';
+};
+
+
+postPlist.prototype.bind = function () {
+    thisObject = this;
+    //visible fields
+    $('#selectVisibleFields').empty()
+    form.populateSelectBox($('#selectVisibleFields'), array.getIntegerArray(1, jsonData.message.meta.message.length))
+    $("#selectVisibleFields").val(paramsObject["vf"]);
+    $('#selectVisibleFields').unbind('change');
+    $("#selectVisibleFields").change(function () {
+        window.location.href = "#/" + strOb + "/plist/" + parameter.getUrlStringFromParamsObject(parameter.getUrlObjectFromParamsWithoutParamArray(paramsObject, ['vf'])) + "&vf=" + $("#selectVisibleFields option:selected").val();
+        return false;
+    });
+    //filter
+    form.populateSelectBox($('#selectFilter'), array.getArrayFromMultiSlicedArray('Name', jsonData.message.meta.message), array.getArrayFromMultiSlicedArray('ShortName', jsonData.message.meta.message));
+    $('#btnFiltrar').unbind('click');
+    $("#btnFiltrar").click(function (event) {
+        var filter = $("#selectFilter option:selected").val();
+        var filteroperator = $("#selectFilteroperator option:selected").val();
+        var filtervalue = $("#inputFiltervalue").val();
+        window.location.href = '#/' + strOb + '/plist/' + parameter.getUrlStringFromParamsObject(parameter.getUrlObjectFromParamsWithoutParamArray(paramsObject, ['filter', 'filteroperator', 'filtervalue'])) + "&filter=" + filter + "&filteroperator=" + filteroperator + "&filtervalue=" + filtervalue;
+        return false;
+    });
+    //filter client
+    form.populateSelectBox($('#selectFilterClient'), array.getArrayFromMultiSlicedArray('Name', jsonData.message.meta.message), array.getArrayFromMultiSlicedArray('ShortName', jsonData.message.meta.message));
+    $('#btnFiltrarClient').unbind('click');
+    $("#btnFiltrarClient").click(function (event) {
+        var filtervalue = $("#inputFiltervalueClient").val();
+        //pte  -> reconstruir this.jsonPage con /word/.test(str)
+        var arrayFiltered = array.filterArray(filtervalue, jsonData.message.page.message);
+        //window.location.href = '#/' + thisObject.strClase + '/plist/' + parameter.getUrlStringFromParamsObject(parameter.getUrlObjectFromParamsWithoutParamArray(thisObject.objParams, ['filter', 'filteroperator', 'filtervalue'])) + "&filter=" + filter + "&filteroperator=" + filteroperator + "&filtervalue=" + filtervalue;
+
+        var strUrlFromParamsWithoutPage = parameter.getUrlStringFromParamsObject(parameter.getUrlObjectFromParamsWithoutParamArray(paramsObject, ["order", "ordervalue"]));
+
+        var strTable = table.getTable(
+                thisObject.getHeaderPageTableFunc(jsonData.message.meta.message, strOb, strUrlFromParamsWithoutPage, paramsObject.vf),
+                thisObject.getBodyPageTableFunc(jsonData.message.meta.message, arrayFiltered, html.printPrincipal, thisObject.loadButtons, thisObject.loadPopups, paramsObject.vf)
+                );
+        $('#broth_content').empty().append(tab.getTab([
+//            {'name': 'Consulta', 'content': strGeneralInformation},
+//            {'name': 'Campos visibles', 'content': strVisibleFields},
+//            {'name': 'Filtro de servidor', 'content': strFilterForm},
+      {'name': 'Búsquedas', 'content': strFilterFormClient},
+//            {'name': 'Nuevo registro', 'content': strNewButton}
+        ]) + '<div id="tablePlace">' + strTable + '</div>');
+        return false;
+    });
+    $("[data-toggle='popover']").popover({trigger: "hover"});
+};
+
+postPlist.prototype.filterFormClientTemplate = function () {
+    return (
+            dom.div('class="row"',
+                    dom.div('class="col-md-12"',
+                            dom.p('',
+                                    dom.form('class="navbar-form navbar-right" role="form" action="Controller" method="post" id="empresaForm"',
+                                            dom.a('class="btn btn-default cbo" href="#/post/new"','Nuevo post')+
+                                          
+                                          
+                                                                                      
+                                          
+            dom.input('id="inputFiltervalueClient" class="form-control" name="filtervalue" type="text" size="20" maxlength="50" value=""  width="100" style="width: 140px" placeholder="Buscar ..."') +
+                                            dom.input('type="submit" class="btn" id="btnFiltrarClient" name="btnFiltrarClient" value="Buscar"')
+                                            )
+                                    )
+                            )
+                    )
+            );
+}

@@ -37,7 +37,7 @@ documentohiloPlist.prototype.loadButtons = function (rowValues, strClass) {
 //    botonera += '<a class="btn btn-default edit" id="' + rowValues[0].data + '"  href="#/' + strClass + '/edit/' + rowValues[0].data + '"><i class="glyphicon glyphicon-pencil"></i></a>';
 //    botonera += '<a class="btn btn-default remove" id="' + rowValues[0].data + '"  href="#/' + strClass + '/remove/' + rowValues[0].data + '"><i class="glyphicon glyphicon-remove"></i></a>';
     //provisional para crear nuevo, hasta que decidamos donde añadirlo
-    botonera += '<a class="btn btn-default cbo" id="' + rowValues[0].data + '"  href="#/' + strClass + '/hilonew"><i class="fa fa-plus fa-1x"></i></a>';
+
     botonera += '<a class="btn btn-default cbo" id="' + rowValues[0].data + '"  href="#/post/plist/rpp=10&vf=10&systemfilter=obj_documento&systemfilteroperator=equals&systemfiltervalue=' + rowValues[0].data + '"><i class="fa fa-gamepad fa-1x"></i></a>';
     botonera += '</div></div>';
     return botonera;
@@ -145,7 +145,7 @@ documentohiloPlist.prototype.getBodyPageTableFunc = function (meta, page, printP
         });
     });
     //Filtra los campos del array de objetos recogiendo los que son necesarios en nuestro caso
-     matrix_meta_data_filtered = _.map(matrix_meta_data, function (oFilter) {
+    matrix_meta_data_filtered = _.map(matrix_meta_data, function (oFilter) {
         return _.pick(oFilter, 0, 1, 3);
     });
     //is an array (rpp) of arrays (rows) of objects
@@ -239,7 +239,12 @@ documentohiloPlist.prototype.filterFormClientTemplate = function () {
                     dom.div('class="col-md-12"',
                             dom.p('',
                                     dom.form('class="navbar-form navbar-right" role="form" action="Controller" method="post" id="empresaForm"',
-                                            dom.input('id="inputFiltervalueClient" class="form-control" name="filtervalue" type="text" size="20" maxlength="50" value=""  width="100" style="width: 140px" placeholder="Buscar ..."') +
+                                            dom.a('class="btn btn-default cbo" href="#/documento/hilonew"','Nuevo hilo')+
+                                          
+                                          
+                                                                                      
+                                          
+            dom.input('id="inputFiltervalueClient" class="form-control" name="filtervalue" type="text" size="20" maxlength="50" value=""  width="100" style="width: 140px" placeholder="Buscar ..."') +
                                             dom.input('type="submit" class="btn" id="btnFiltrarClient" name="btnFiltrarClient" value="Buscar"')
                                             )
                                     )
@@ -247,3 +252,51 @@ documentohiloPlist.prototype.filterFormClientTemplate = function () {
                     )
             );
 }
+
+documentohiloPlist.prototype.bind = function () {
+    thisObject = this;
+    //visible fields
+    $('#selectVisibleFields').empty()
+    form.populateSelectBox($('#selectVisibleFields'), array.getIntegerArray(1, jsonData.message.meta.message.length))
+    $("#selectVisibleFields").val(paramsObject["vf"]);
+    $('#selectVisibleFields').unbind('change');
+    $("#selectVisibleFields").change(function () {
+        window.location.href = "#/" + strOb + "/plist/" + parameter.getUrlStringFromParamsObject(parameter.getUrlObjectFromParamsWithoutParamArray(paramsObject, ['vf'])) + "&vf=" + $("#selectVisibleFields option:selected").val();
+        return false;
+    });
+    //filter
+    form.populateSelectBox($('#selectFilter'), array.getArrayFromMultiSlicedArray('Name', jsonData.message.meta.message), array.getArrayFromMultiSlicedArray('ShortName', jsonData.message.meta.message));
+    $('#btnFiltrar').unbind('click');
+    $("#btnFiltrar").click(function (event) {
+        var filter = $("#selectFilter option:selected").val();
+        var filteroperator = $("#selectFilteroperator option:selected").val();
+        var filtervalue = $("#inputFiltervalue").val();
+        window.location.href = '#/' + strOb + '/plist/' + parameter.getUrlStringFromParamsObject(parameter.getUrlObjectFromParamsWithoutParamArray(paramsObject, ['filter', 'filteroperator', 'filtervalue'])) + "&filter=" + filter + "&filteroperator=" + filteroperator + "&filtervalue=" + filtervalue;
+        return false;
+    });
+    //filter client
+    form.populateSelectBox($('#selectFilterClient'), array.getArrayFromMultiSlicedArray('Name', jsonData.message.meta.message), array.getArrayFromMultiSlicedArray('ShortName', jsonData.message.meta.message));
+    $('#btnFiltrarClient').unbind('click');
+    $("#btnFiltrarClient").click(function (event) {
+        var filtervalue = $("#inputFiltervalueClient").val();
+        //pte  -> reconstruir this.jsonPage con /word/.test(str)
+        var arrayFiltered = array.filterArray(filtervalue, jsonData.message.page.message);
+        //window.location.href = '#/' + thisObject.strClase + '/plist/' + parameter.getUrlStringFromParamsObject(parameter.getUrlObjectFromParamsWithoutParamArray(thisObject.objParams, ['filter', 'filteroperator', 'filtervalue'])) + "&filter=" + filter + "&filteroperator=" + filteroperator + "&filtervalue=" + filtervalue;
+
+        var strUrlFromParamsWithoutPage = parameter.getUrlStringFromParamsObject(parameter.getUrlObjectFromParamsWithoutParamArray(paramsObject, ["order", "ordervalue"]));
+
+        var strTable = table.getTable(
+                thisObject.getHeaderPageTableFunc(jsonData.message.meta.message, strOb, strUrlFromParamsWithoutPage, paramsObject.vf),
+                thisObject.getBodyPageTableFunc(jsonData.message.meta.message, arrayFiltered, html.printPrincipal, thisObject.loadButtons, thisObject.loadPopups, paramsObject.vf)
+                );
+        $('#broth_content').empty().append(tab.getTab([
+//            {'name': 'Consulta', 'content': strGeneralInformation},
+//            {'name': 'Campos visibles', 'content': strVisibleFields},
+//            {'name': 'Filtro de servidor', 'content': strFilterForm},
+             {'name': 'Indice de temas', 'content': strFilterFormClient}
+//            {'name': 'Nuevo registro', 'content': strNewButton}
+        ]) + '<div id="tablePlace">' + strTable + '</div>');
+        return false;
+    });
+    $("[data-toggle='popover']").popover({trigger: "hover"});
+};
