@@ -27,14 +27,14 @@
  */
 
 function fPostRoutes() {
-    
+
     var icon = '<i class="fa fa-clipboard fa-5x"></i>';
     var fillDocumentoPageHeader = _.partial(html.getPageHeader, icon, 'Post', _);
     var strClass = 'post';
-    var header=$('#broth_panel_heading');
+    var header = $('#broth_panel_heading');
     var content = $('#broth_content');
-    
-        //--------------------------------------------------------------------------
+
+    //--------------------------------------------------------------------------
     Path.map("#/" + strClass + "/remove/:id").to(function () {
         header.empty().append(fillDocumentoPageHeader('Remove'));
         var strParam = parameter.getUrlObjectFromUrlString(this.params['url']);
@@ -78,7 +78,8 @@ function fPostRoutes() {
     Path.map("#/" + strClass + "/plist(/:url)").to(function () {
 //        $( "<style>background-color: black;</style>" ).appendTo( content );
 //           var myEstilo ="paquito.css";
-        $('<link href="css/specific/post.css" rel="stylesheet" type="text/css"/>').appendTo("head");
+        $('<link href="http://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css"/>').appendTo("head");
+        $('<link href="css/specific/documentohiloplist.css" rel="stylesheet" type="text/css"/>').appendTo("head");
         header.empty().append(fillDocumentoPageHeader('Paginated List'));
         var strParam = parameter.getUrlObjectFromUrlString(this.params['url']);
         ausiasFLOW.reset();
@@ -93,6 +94,6 @@ function fPostRoutes() {
         ausiasFLOW.initialize(postDocumento, content, strClass, 'plist', strParam);
         return false;
     });
-    
+
 }
 

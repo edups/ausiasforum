@@ -26,23 +26,39 @@
  * 
  */
 
- postPlist= function () {
+postPlist = function () {
 
 };
 postPlist.prototype = new pListModule();
 postPlist.prototype.getHeaderPageTableFunc = function (jsonMeta, strOb, UrlFromParamsWithoutOrder, visibles, acciones) {
     thisObject = this;
     acciones = typeof (acciones) != 'undefined' ? acciones : true;
-    arr_meta_data_tableHeader = _.map(jsonMeta, function (oMeta, key) {
+    
+    arr_meta_data_tableHeader_filtered = _.filter(jsonMeta, function (oItem) {
+        if (oItem.Name == "id" || oItem.Name == "mensaje" || oItem.Name == "fecha") {
+            return true;
+        } else {
+            return false;
+        }
+    });
+    
+    arr_meta_data_tableHeader = _.map(arr_meta_data_tableHeader_filtered, function (oMeta, key) {
         if (oMeta.IsId) {
             return '<div class="col-md-1">'
                     + oMeta.UltraShortName
                     + '<br />'
                     + thisObject.loadThButtons(oMeta, strOb, UrlFromParamsWithoutOrder)
                     + '</div>';
-        } else {
-            return  '<div class="col-md-1">'
-                    + oMeta.UltraShortName 
+        }else if (oMeta.Name == "mensaje") {
+            return '<div class="col-md-7 col-md-offset-1 cabeceraTitulo">'
+                    + oMeta.ShortName
+                    + '<br />'
+                    + thisObject.loadThButtons(oMeta, strOb, UrlFromParamsWithoutOrder)
+                    + '</div>';
+        } 
+        else {
+            return  '<div class="col-md-2">'
+                    + oMeta.UltraShortName
                     + '<br />'
                     + thisObject.loadThButtons(oMeta, strOb, UrlFromParamsWithoutOrder)
                     + '</div>';
@@ -50,16 +66,16 @@ postPlist.prototype.getHeaderPageTableFunc = function (jsonMeta, strOb, UrlFromP
     });
     //visibles
     if (visibles) {
-        arr_meta_data_tableHeader_visibles = arr_meta_data_tableHeader.slice(0, parseInt(visibles));
+        arr_meta_data_tableHeader_visibles = arr_meta_data_tableHeader.slice(1, parseInt(visibles));
     } else {
         arr_meta_data_tableHeader_visibles = arr_meta_data_tableHeader;
     }
     if (acciones) {
-        arr_meta_data_tableHeader_visibles_acciones = arr_meta_data_tableHeader_visibles.concat(['<div class="col-md-3">Acciones </div>']);
+        arr_meta_data_tableHeader_visibles_acciones = arr_meta_data_tableHeader_visibles.concat(['<div class="col-md-2">Acciones </div>']);
     } else {
         arr_meta_data_tableHeader_visibles_acciones = arr_meta_data_tableHeader_visibles;
     }
-    return '<div class="row">' + arr_meta_data_tableHeader_visibles_acciones.join('') + '</div>';
+    return '<div class="row cabeceraGlobal">' + arr_meta_data_tableHeader_visibles_acciones.join('') + '</div>';
 }
 postPlist.prototype.getBodyPageTableFunc = function (meta, page, printPrincipal, tdButtons_function, trPopup_function, visibles) {
     //thisObject.jsonData.message.page.list: es un array de objetos. Cada objeto contiene una fila de la tabla de la petición
@@ -69,15 +85,38 @@ postPlist.prototype.getBodyPageTableFunc = function (meta, page, printPrincipal,
             return  {meta: oMeta, data: oRow[oMeta.Name]};
         });
     });
+    
+    //Filtra los campos del array de objetos recogiendo los que son necesarios en nuestro caso
+    matrix_meta_data_filtered = _.map(matrix_meta_data, function (oFilter) {
+        return _.pick(oFilter, 0, 3, 4);
+    });
     //is an array (rpp) of arrays (rows) of objects
     //every object contains the data and its metadata
-    var arr_meta_data_table_buttons = _.map(matrix_meta_data, function (value, key) {
-        return (_.map(matrix_meta_data[key], function (value2, key2) {
-            return  '<div class="col-md-1 matriz">' + printPrincipal(value2) + '</div>';
+    var arr_meta_data_table_buttons = _.map(matrix_meta_data_filtered, function (value, key) {
+        return (_.map(matrix_meta_data_filtered[key], function (value2, key2) {
+          //  return  '<div class="col-md-1 matriz">' + printPrincipal(value2) + '</div>';
+
+            if (value2.meta.Name == "mensaje") {
+                return         '<div class="post">'
+                        + '<div class="col-md-1 icono">'
+                        + '<i class="fa fa-list-ul fa-1x"></i>'
+
+                        + '</div>'
+
+                        + '<div class="col-md-7  titulo">'
+
+                        + printPrincipal(value2)
+                        + '</div>'
+            } else {
+
+                return '<div class="col-md-2 matriz">'
+                        + printPrincipal(value2)
+                        + '</div>';
+            }
         })
                 )
-                .slice(0, parseInt(visibles))
-                .concat(['<div class="botns">' + tdButtons_function(value, strOb) + '</div>']);
+                .slice(1, parseInt(visibles))
+                .concat(['<div class="botns">' + tdButtons_function(value, strOb) + '</div></div>']);
     });
     //is an array (rpp) of arrays (rows) of strings
     //every string contains the data of the table cell
@@ -177,7 +216,7 @@ postPlist.prototype.bind = function () {
 //            {'name': 'Consulta', 'content': strGeneralInformation},
 //            {'name': 'Campos visibles', 'content': strVisibleFields},
 //            {'name': 'Filtro de servidor', 'content': strFilterForm},
-      {'name': 'Búsquedas', 'content': strFilterFormClient},
+            {'name': 'Búsquedas', 'content': strFilterFormClient},
 //            {'name': 'Nuevo registro', 'content': strNewButton}
         ]) + '<div id="tablePlace">' + strTable + '</div>');
         return false;
@@ -191,12 +230,8 @@ postPlist.prototype.filterFormClientTemplate = function () {
                     dom.div('class="col-md-12"',
                             dom.p('',
                                     dom.form('class="navbar-form navbar-right" role="form" action="Controller" method="post" id="empresaForm"',
-                                            dom.a('class="btn btn-default cbo" href="#/post/new"','Nuevo post')+
-                                          
-                                          
-                                                                                      
-                                          
-            dom.input('id="inputFiltervalueClient" class="form-control" name="filtervalue" type="text" size="20" maxlength="50" value=""  width="100" style="width: 140px" placeholder="Buscar ..."') +
+                                            dom.a('class="btn btn-default cbo" href="#/post/new"', 'Nuevo post') +
+                                            dom.input('id="inputFiltervalueClient" class="form-control" name="filtervalue" type="text" size="20" maxlength="50" value=""  width="100" style="width: 140px" placeholder="Buscar ..."') +
                                             dom.input('type="submit" class="btn" id="btnFiltrarClient" name="btnFiltrarClient" value="Buscar"')
                                             )
                                     )

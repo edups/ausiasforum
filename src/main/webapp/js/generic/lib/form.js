@@ -207,8 +207,8 @@ form = {
             $('#' + obMain + 'Form').append(modal.getEmptyModal('modal01'));
             modal.loadModal('#modal01', modal.getModalHeader('Elección de ' + obForeign), "", modal.getModalFooter(), true);
             ausiasFLOW.initialize(ebpListModule, $('#modal-body'), obForeign , 'plist', {"vf": 4}, function (id) {
-                $('#obj_' + obForeign).val(1);
-                promise.getOne(obForeign, 1).done(function (json) {
+                $('#obj_' + obForeign).val(id);
+                promise.getOne(obForeign, id).done(function (json) {
                     $('#obj_' + obForeign + '_desc').html(html.printObject2(obForeign, json.message.meta.message,json.message.bean.message));
                 });
                 $('#modal01').modal('hide');
