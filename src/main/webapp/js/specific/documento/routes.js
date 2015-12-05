@@ -125,7 +125,7 @@ function fDocumentoRoutes() {
     Path.map("#/" + strClass + "/hilonew(/:url)").to(function () {
         $('<link href="http://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css"/>').appendTo("head");
         $('<link href="css/specific/hilonew.css" rel="stylesheet" type="text/css"/>').appendTo("head");
-        header.empty().append(fillDocumentoPageHeader('Crear un hilo nuevo'));
+        header.empty().append(fillDocumentoPageHeader('Crear un tema nuevo'));
         var strParam = parameter.getUrlObjectFromUrlString(this.params['url']);
         ausiasFLOW.reset();
         ausiasFLOW.initialize(documentohiloNew, content, strClass, 'new', strParam);

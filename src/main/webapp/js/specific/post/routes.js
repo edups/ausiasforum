@@ -80,7 +80,7 @@ function fPostRoutes() {
 //           var myEstilo ="paquito.css";
         $('<link href="http://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css"/>').appendTo("head");
         $('<link href="css/specific/documentohiloplist.css" rel="stylesheet" type="text/css"/>').appendTo("head");
-        header.empty().append(fillDocumentoPageHeader('Paginated List'));
+        header.empty().append(fillDocumentoPageHeader('Listado de Posts'));
         var strParam = parameter.getUrlObjectFromUrlString(this.params['url']);
         ausiasFLOW.reset();
         ausiasFLOW.initialize(postPlist, content, strClass, 'plist', strParam);

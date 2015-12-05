@@ -72,7 +72,7 @@ documentohiloPlist.prototype.loadThButtons = function (meta, strClase, UrlFromPa
 //        }
 //    }
 //    documentohiloPlist.prototype.miClipString = function (strResult, charsToClipStart) {
-//        charsToClipStart = string.defaultizeValue(charsToClipStart, 40);
+//        charsToClipStart = string.defaultizeValue(charsToClipStart, 60);
 //        if (typeof strResult === 'string') {
 //            if (strResult.length > charsToClipStart)
 //                return strResult.substr(0, charsToClipStart).trim() + " ...";
@@ -110,7 +110,7 @@ documentohiloPlist.prototype.getHeaderPageTableFunc = function (jsonMeta, strOb,
                     + thisObject.loadThButtons(oMeta, strOb, UrlFromParamsWithoutOrder)
                     + '</div>';
         } else {
-            return  '<div class="col-md-2 cabeceraCuerpo">'
+            return  '<div class="col-md-4 cabeceraCuerpo">'
 //                    + oMeta.ShortName
                     + 'Fecha de Creación'
                     + '<br />'
@@ -129,12 +129,13 @@ documentohiloPlist.prototype.getHeaderPageTableFunc = function (jsonMeta, strOb,
     } else {
         arr_meta_data_tableHeader_visibles = arr_meta_data_tableHeader;
     }
-    if (acciones) {
-        arr_meta_data_tableHeader_visibles_acciones = arr_meta_data_tableHeader_visibles.concat(['<div class="col-md-2">Acciones </div>']);
-    } else {
-        arr_meta_data_tableHeader_visibles_acciones = arr_meta_data_tableHeader_visibles;
-    }
-    return '<div class="row cabeceraGlobal">' + arr_meta_data_tableHeader_visibles_acciones.join('') + '</div>';
+//    if (acciones) {
+//        arr_meta_data_tableHeader_visibles_acciones = arr_meta_data_tableHeader_visibles.concat(['<div class="col-md-2">Acciones </div>']);
+//    } else {
+//        arr_meta_data_tableHeader_visibles_acciones = arr_meta_data_tableHeader_visibles;
+//    }
+//    return '<div class="row cabeceraGlobal">' + arr_meta_data_tableHeader_visibles_acciones.join('') + '</div>';
+    return '<div class="row cabeceraGlobal">' + arr_meta_data_tableHeader_visibles.join('') + '</div>';
 }
 documentohiloPlist.prototype.getBodyPageTableFunc = function (meta, page, printPrincipal, tdButtons_function, trPopup_function, visibles) {
     //thisObject.jsonData.message.page.list: es un array de objetos. Cada objeto contiene una fila de la tabla de la petición
@@ -153,21 +154,24 @@ documentohiloPlist.prototype.getBodyPageTableFunc = function (meta, page, printP
     var arr_meta_data_table_buttons = _.map(matrix_meta_data_filtered, function (value, key) {
         return (_.map(matrix_meta_data_filtered[key], function (value2, key2) {
 //            return  
-
+            var dataid = matrix_meta_data_filtered[key][0].data;
+           
             if (value2.meta.Name == "titulo") {
-                return         '<div class="post">'
-                        + '<div class="col-md-1 icono">'
+                return   '<div class="row post">'
+                        +  '<div class="col-md-1 icono">'
                         + '<i class="fa fa-list-alt fa-2x"></i>'
 
                         + '</div>'
 
                         + '<div class="col-md-7 titulo">'
-
+                        + '<a  id="' + dataid + '"  href="#/post/plist/rpp=10&vf=10&systemfilter=obj_documento&systemfilteroperator=equals&systemfiltervalue=' + dataid + '">'
                         + printPrincipal(value2)
+                        + '</a>'
+
                         + '</div>'
             } else {
 
-                return '<div class="col-md-2 matriz">'
+                return '<div class="col-md-4 matriz">'
                         + printPrincipal(value2)
                         + '</div>';
             }
@@ -175,7 +179,8 @@ documentohiloPlist.prototype.getBodyPageTableFunc = function (meta, page, printP
         })
                 )
                 .slice(1, parseInt(visibles))
-                .concat(['<div class="botns">' + tdButtons_function(value, strOb) + '</div> </div>']);
+//                .concat(['<div class="botns">' + tdButtons_function(value, strOb) + '</div> </div>']);
+                .concat(['</div>']);
     });
     //is an array (rpp) of arrays (rows) of strings
     //every string contains the data of the table cell
@@ -239,12 +244,8 @@ documentohiloPlist.prototype.filterFormClientTemplate = function () {
                     dom.div('class="col-md-12"',
                             dom.p('',
                                     dom.form('class="navbar-form navbar-right" role="form" action="Controller" method="post" id="empresaForm"',
-                                            dom.a('class="btn btn-default cbo" href="#/documento/hilonew"','Nuevo hilo')+
-                                          
-                                          
-                                                                                      
-                                          
-            dom.input('id="inputFiltervalueClient" class="form-control" name="filtervalue" type="text" size="20" maxlength="50" value=""  width="100" style="width: 140px" placeholder="Buscar ..."') +
+                                            dom.a('class="btn btn-default cbo" href="#/documento/hilonew"', 'Nuevo tema') +
+                                            dom.input('id="inputFiltervalueClient" class="form-control" name="filtervalue" type="text" size="20" maxlength="50" value=""  width="100" style="width: 140px" placeholder="Buscar ..."') +
                                             dom.input('type="submit" class="btn" id="btnFiltrarClient" name="btnFiltrarClient" value="Buscar"')
                                             )
                                     )
@@ -293,7 +294,7 @@ documentohiloPlist.prototype.bind = function () {
 //            {'name': 'Consulta', 'content': strGeneralInformation},
 //            {'name': 'Campos visibles', 'content': strVisibleFields},
 //            {'name': 'Filtro de servidor', 'content': strFilterForm},
-             {'name': 'Indice de temas', 'content': strFilterFormClient}
+            {'name': 'Indice de temas', 'content': strFilterFormClient}
 //            {'name': 'Nuevo registro', 'content': strNewButton}
         ]) + '<div id="tablePlace">' + strTable + '</div>');
         return false;

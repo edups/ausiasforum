@@ -30,10 +30,24 @@ postPlist = function () {
 
 };
 postPlist.prototype = new pListModule();
+postPlist.prototype.getTitle = function (jsonData) {
+    var ltittle = jsonData.message.page.message.length;
+    var titulo="";
+    var h2="";
+    if (ltittle != 0) {
+        titulo += jsonData.message.page.message[0].obj_documento.bean.titulo;
+        h2 += '<h2>Posts sobre el tema : ' + titulo + '</h2>';
+//     return h2;
+    } else {
+        h2 = '<h2>No existen posts de este tema</h2>';
+
+    }
+    return h2;
+};
 postPlist.prototype.getHeaderPageTableFunc = function (jsonMeta, strOb, UrlFromParamsWithoutOrder, visibles, acciones) {
     thisObject = this;
     acciones = typeof (acciones) != 'undefined' ? acciones : true;
-    
+
     arr_meta_data_tableHeader_filtered = _.filter(jsonMeta, function (oItem) {
         if (oItem.Name == "id" || oItem.Name == "mensaje" || oItem.Name == "fecha") {
             return true;
@@ -41,7 +55,7 @@ postPlist.prototype.getHeaderPageTableFunc = function (jsonMeta, strOb, UrlFromP
             return false;
         }
     });
-    
+
     arr_meta_data_tableHeader = _.map(arr_meta_data_tableHeader_filtered, function (oMeta, key) {
         if (oMeta.IsId) {
             return '<div class="col-md-1">'
@@ -49,13 +63,13 @@ postPlist.prototype.getHeaderPageTableFunc = function (jsonMeta, strOb, UrlFromP
                     + '<br />'
                     + thisObject.loadThButtons(oMeta, strOb, UrlFromParamsWithoutOrder)
                     + '</div>';
-        }else if (oMeta.Name == "mensaje") {
+        } else if (oMeta.Name == "mensaje") {
             return '<div class="col-md-7 col-md-offset-1 cabeceraTitulo">'
                     + oMeta.ShortName
                     + '<br />'
                     + thisObject.loadThButtons(oMeta, strOb, UrlFromParamsWithoutOrder)
                     + '</div>';
-        } 
+        }
         else {
             return  '<div class="col-md-2">'
                     + oMeta.UltraShortName
@@ -85,7 +99,7 @@ postPlist.prototype.getBodyPageTableFunc = function (meta, page, printPrincipal,
             return  {meta: oMeta, data: oRow[oMeta.Name]};
         });
     });
-    
+
     //Filtra los campos del array de objetos recogiendo los que son necesarios en nuestro caso
     matrix_meta_data_filtered = _.map(matrix_meta_data, function (oFilter) {
         return _.pick(oFilter, 0, 3, 4);
@@ -94,7 +108,7 @@ postPlist.prototype.getBodyPageTableFunc = function (meta, page, printPrincipal,
     //every object contains the data and its metadata
     var arr_meta_data_table_buttons = _.map(matrix_meta_data_filtered, function (value, key) {
         return (_.map(matrix_meta_data_filtered[key], function (value2, key2) {
-          //  return  '<div class="col-md-1 matriz">' + printPrincipal(value2) + '</div>';
+            //  return  '<div class="col-md-1 matriz">' + printPrincipal(value2) + '</div>';
 
             if (value2.meta.Name == "mensaje") {
                 return         '<div class="post">'
@@ -161,7 +175,7 @@ postPlist.prototype.render = function () {
     strFilterFormClient = this.filterFormClientTemplate();
     strNewButton = this.newTemplate(strOb);
     //console.log(this.loadButtons('2','1'))   //??
-
+    titlePost= this.getTitle(jsonData);
     strTable = table.getTable(
             this.getHeaderPageTableFunc(jsonData.message.meta.message, strOb, strUrlFromParamsWithoutOrder, paramsObject.vf),
             this.getBodyPageTableFunc(jsonData.message.meta.message, jsonData.message.page.message, html.printPrincipal, this.loadButtons, this.loadPopups, paramsObject.vf)
@@ -172,7 +186,8 @@ postPlist.prototype.render = function () {
 //        {'name': 'Búsquedas', 'content': strFilterForm},
         {'name': 'Búsquedas', 'content': strFilterFormClient},
 //        {'name': 'Nuevo registro', 'content': strNewButton}
-    ]) + '<div id="tablePlace">' + strTable + '</div>';
+    ]) + '<div id="tablePlace">' +titlePost + strTable + '</div>';
+//    ]) + '<div id="tablePlace">' + strTable + '</div>';
 };
 
 
@@ -207,7 +222,7 @@ postPlist.prototype.bind = function () {
         //window.location.href = '#/' + thisObject.strClase + '/plist/' + parameter.getUrlStringFromParamsObject(parameter.getUrlObjectFromParamsWithoutParamArray(thisObject.objParams, ['filter', 'filteroperator', 'filtervalue'])) + "&filter=" + filter + "&filteroperator=" + filteroperator + "&filtervalue=" + filtervalue;
 
         var strUrlFromParamsWithoutPage = parameter.getUrlStringFromParamsObject(parameter.getUrlObjectFromParamsWithoutParamArray(paramsObject, ["order", "ordervalue"]));
-
+        titlePost= this.getTitle(jsonData);
         var strTable = table.getTable(
                 thisObject.getHeaderPageTableFunc(jsonData.message.meta.message, strOb, strUrlFromParamsWithoutPage, paramsObject.vf),
                 thisObject.getBodyPageTableFunc(jsonData.message.meta.message, arrayFiltered, html.printPrincipal, thisObject.loadButtons, thisObject.loadPopups, paramsObject.vf)
@@ -218,7 +233,8 @@ postPlist.prototype.bind = function () {
 //            {'name': 'Filtro de servidor', 'content': strFilterForm},
             {'name': 'Búsquedas', 'content': strFilterFormClient},
 //            {'name': 'Nuevo registro', 'content': strNewButton}
-        ]) + '<div id="tablePlace">' + strTable + '</div>');
+//        ]) + '<div id="tablePlace">' + strTable + '</div>');
+    ]) + '<div id="tablePlace">' +titlePost + strTable + '</div>');
         return false;
     });
     $("[data-toggle='popover']").popover({trigger: "hover"});
