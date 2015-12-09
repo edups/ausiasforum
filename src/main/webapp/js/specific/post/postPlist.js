@@ -45,11 +45,11 @@ postPlist.prototype.getTitle = function (jsonData) {
     return h2;
 };
 
-postPlist.prototype.getIdDocumento = function (jsonData) {
-    var idDocumento = "";
-    idDocumento=jsonData.message.page.message[0].obj_documento.bean.id;
-    return idDocumento;
-};
+//postPlist.prototype.getIdDocumento = function (jsonData) {
+//    var idDocumento = "";
+//    idDocumento=jsonData.message.page.message[0].obj_documento.bean.id;
+//    return idDocumento;
+//};
 
 
 postPlist.prototype.getHeaderPageTableFunc = function (jsonMeta, strOb, UrlFromParamsWithoutOrder, visibles, acciones) {
@@ -180,7 +180,7 @@ postPlist.prototype.render = function () {
             );
     strVisibleFields = this.visibleFieldsTemplate();
     strFilterForm = this.filterFormTemplate();
-    strFilterFormClient = this.filterFormClientTemplate();
+    strFilterFormClient = this.filterFormClientTemplate(paramsObject.systemfiltervalue);
     strNewButton = this.newTemplate(strOb);
     //console.log(this.loadButtons('2','1'))   //??
     titlePost = this.getTitle(jsonData);
@@ -249,13 +249,13 @@ postPlist.prototype.bind = function () {
 };
 
 
-postPlist.prototype.filterFormClientTemplate = function () {
+postPlist.prototype.filterFormClientTemplate = function (id) {
     return (
             dom.div('class="row"',
                     dom.div('class="col-md-12"',
                             dom.p('',
                                     dom.form('class="navbar-form navbar-right" role="form" action="Controller" method="post" id="empresaForm"',
-                                            dom.a('class="btn btn-default cbo" href="#/post/new/usuario=' + id_session_user + '&documento='+this.getIdDocumento(jsonData)+'"', 'Nuevo post') +
+                                            dom.a('class="btn btn-default cbo" href="#/post/new/usuario=' + id_session_user + '&documento='+id+'"', 'Nuevo post') +
                                             dom.input('id="inputFiltervalueClient" class="form-control" name="filtervalue" type="text" size="20" maxlength="50" value=""  width="100" style="width: 140px" placeholder="Buscar ..."') +
                                             dom.input('type="submit" class="btn" id="btnFiltrarClient" name="btnFiltrarClient" value="Buscar"')
                                             )
