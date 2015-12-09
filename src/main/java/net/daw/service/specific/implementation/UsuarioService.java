@@ -46,6 +46,7 @@ public class UsuarioService extends TableServiceGenImpl {
     public String login() throws SQLException, Exception {
         UsuarioBean oUserBean = (UsuarioBean) oRequest.getSession().getAttribute("userBean");
         String strAnswer = null;
+        Integer strIdUsuario = null;
         String strCode = "200";
         if (oUserBean == null) {
             String login = oRequest.getParameter("login");
@@ -64,6 +65,7 @@ public class UsuarioService extends TableServiceGenImpl {
                     if (oUsuario.getId() != 0) {
                         oRequest.getSession().setAttribute("userBean", oUsuario);
                         strAnswer = oUsuario.getLogin();
+                        strIdUsuario = oUsuario.getId();
                     } else {
                         strCode = "403";
                         strAnswer = "User or password incorrect";
@@ -82,7 +84,8 @@ public class UsuarioService extends TableServiceGenImpl {
         } else {
             strAnswer = "Already logged in";
         }
-        return JsonMessage.getJsonMsg(strCode, strAnswer);
+//        return JsonMessage.getJsonMsg(strCode, strAnswer);
+        return "{\"status\":"+strCode+",\"message\":\""+strAnswer+"\",\"id\":"+strIdUsuario+"}";
     }
 
     public String logout() {        
@@ -96,7 +99,7 @@ public class UsuarioService extends TableServiceGenImpl {
         if (oUserBean == null) {
             return JsonMessage.getJsonMsg("403", "ERROR: You don't have permission to perform this operation");
         } else {
-            return "{\"status\":200,\"message\":{\"id\":" + oUserBean.getId()+ ",\"login\":"+oUserBean.getLogin()+"}";
+            return "{\"status\":200,\"message\":\""+oUserBean.getLogin()+"\",\"id\":"+oUserBean.getId()+"}";
         }
     }
 

@@ -241,12 +241,13 @@ postPlist.prototype.bind = function () {
 };
 
 postPlist.prototype.filterFormClientTemplate = function () {
+    
     return (
             dom.div('class="row"',
                     dom.div('class="col-md-12"',
                             dom.p('',
                                     dom.form('class="navbar-form navbar-right" role="form" action="Controller" method="post" id="empresaForm"',
-                                            dom.a('class="btn btn-default cbo" href="#/post/new"', 'Nuevo post') +
+                                            dom.a('class="btn btn-default cbo" href="#/post/new/usuario='+id_session_user+'"', 'Nuevo post') +
                                             dom.input('id="inputFiltervalueClient" class="form-control" name="filtervalue" type="text" size="20" maxlength="50" value=""  width="100" style="width: 140px" placeholder="Buscar ..."') +
                                             dom.input('type="submit" class="btn" id="btnFiltrarClient" name="btnFiltrarClient" value="Buscar"')
                                             )
@@ -254,4 +255,4 @@ postPlist.prototype.filterFormClientTemplate = function () {
                             )
                     )
             );
-}
+};

@@ -78,6 +78,7 @@ var session = {
         promise.getSession().done(function (data) {
             if (data['status'] == 200) {
                 session.updateConnectedState(data.message);
+                id_session_user = data.id;
             } else {
                 session.updateDisconnectedState();
             }
@@ -115,6 +116,7 @@ var session = {
                     $("#broth_login_modal_footer").html("Welcome, you're allowed to enter the site!");
                     session.unloadLoginForm();
                     session.updateConnectedState(response.message)
+                    id_session_user = response.id;
                 } else {
                     $("#broth_login_modal_footer").html("Login, password or both are incorrect. Please try it again.");
                     session.updateDisconnectedState();
