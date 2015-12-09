@@ -27,13 +27,13 @@
  */
 
 postPlist = function () {
-
+    
 };
 postPlist.prototype = new pListModule();
 postPlist.prototype.getTitle = function (jsonData) {
     var ltittle = jsonData.message.page.message.length;
-    var titulo="";
-    var h2="";
+    var titulo = "";
+    var h2 = "";
     if (ltittle != 0) {
         titulo += jsonData.message.page.message[0].obj_documento.bean.titulo;
         h2 += '<h2>Posts sobre el tema : ' + titulo + '</h2>';
@@ -44,6 +44,14 @@ postPlist.prototype.getTitle = function (jsonData) {
     }
     return h2;
 };
+
+postPlist.prototype.getIdDocumento = function (jsonData) {
+    var idDocumento = "";
+    idDocumento=jsonData.message.page.message[0].obj_documento.bean.id;
+    return idDocumento;
+};
+
+
 postPlist.prototype.getHeaderPageTableFunc = function (jsonMeta, strOb, UrlFromParamsWithoutOrder, visibles, acciones) {
     thisObject = this;
     acciones = typeof (acciones) != 'undefined' ? acciones : true;
@@ -175,7 +183,7 @@ postPlist.prototype.render = function () {
     strFilterFormClient = this.filterFormClientTemplate();
     strNewButton = this.newTemplate(strOb);
     //console.log(this.loadButtons('2','1'))   //??
-    titlePost= this.getTitle(jsonData);
+    titlePost = this.getTitle(jsonData);
     strTable = table.getTable(
             this.getHeaderPageTableFunc(jsonData.message.meta.message, strOb, strUrlFromParamsWithoutOrder, paramsObject.vf),
             this.getBodyPageTableFunc(jsonData.message.meta.message, jsonData.message.page.message, html.printPrincipal, this.loadButtons, this.loadPopups, paramsObject.vf)
@@ -186,7 +194,7 @@ postPlist.prototype.render = function () {
 //        {'name': 'Búsquedas', 'content': strFilterForm},
         {'name': 'Búsquedas', 'content': strFilterFormClient},
 //        {'name': 'Nuevo registro', 'content': strNewButton}
-    ]) + '<div id="tablePlace">' +titlePost + strTable + '</div>';
+    ]) + '<div id="tablePlace">' + titlePost + strTable + '</div>';
 //    ]) + '<div id="tablePlace">' + strTable + '</div>';
 };
 
@@ -222,7 +230,7 @@ postPlist.prototype.bind = function () {
         //window.location.href = '#/' + thisObject.strClase + '/plist/' + parameter.getUrlStringFromParamsObject(parameter.getUrlObjectFromParamsWithoutParamArray(thisObject.objParams, ['filter', 'filteroperator', 'filtervalue'])) + "&filter=" + filter + "&filteroperator=" + filteroperator + "&filtervalue=" + filtervalue;
 
         var strUrlFromParamsWithoutPage = parameter.getUrlStringFromParamsObject(parameter.getUrlObjectFromParamsWithoutParamArray(paramsObject, ["order", "ordervalue"]));
-        titlePost= this.getTitle(jsonData);
+        titlePost = this.getTitle(jsonData);
         var strTable = table.getTable(
                 thisObject.getHeaderPageTableFunc(jsonData.message.meta.message, strOb, strUrlFromParamsWithoutPage, paramsObject.vf),
                 thisObject.getBodyPageTableFunc(jsonData.message.meta.message, arrayFiltered, html.printPrincipal, thisObject.loadButtons, thisObject.loadPopups, paramsObject.vf)
@@ -234,20 +242,20 @@ postPlist.prototype.bind = function () {
             {'name': 'Búsquedas', 'content': strFilterFormClient},
 //            {'name': 'Nuevo registro', 'content': strNewButton}
 //        ]) + '<div id="tablePlace">' + strTable + '</div>');
-    ]) + '<div id="tablePlace">' +titlePost + strTable + '</div>');
+        ]) + '<div id="tablePlace">' + titlePost + strTable + '</div>');
         return false;
     });
     $("[data-toggle='popover']").popover({trigger: "hover"});
 };
 
+
 postPlist.prototype.filterFormClientTemplate = function () {
-    
     return (
             dom.div('class="row"',
                     dom.div('class="col-md-12"',
                             dom.p('',
                                     dom.form('class="navbar-form navbar-right" role="form" action="Controller" method="post" id="empresaForm"',
-                                            dom.a('class="btn btn-default cbo" href="#/post/new/usuario='+id_session_user+'"', 'Nuevo post') +
+                                            dom.a('class="btn btn-default cbo" href="#/post/new/usuario=' + id_session_user + '&documento='+this.getIdDocumento(jsonData)+'"', 'Nuevo post') +
                                             dom.input('id="inputFiltervalueClient" class="form-control" name="filtervalue" type="text" size="20" maxlength="50" value=""  width="100" style="width: 140px" placeholder="Buscar ..."') +
                                             dom.input('type="submit" class="btn" id="btnFiltrarClient" name="btnFiltrarClient" value="Buscar"')
                                             )
