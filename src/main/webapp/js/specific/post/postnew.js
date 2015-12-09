@@ -29,6 +29,22 @@
 var postNew = function () {
 };
 postNew.prototype = new newModule();
+
+postNew.prototype.render = function () {
+    if (jsonData.status == "200") {
+     jsonData_filtered = _.filter(jsonData.message, function(oItem){
+        if (oItem.Name=="fecha") {
+            return false;
+        } else {
+            return true;
+        }
+    } );
+            return form.getFormTemplate(strClass, jsonData_filtered);
+    } else {
+        return util.notifyException(jsonData.status, jsonData.message);
+    }
+    
+};
 postNew.prototype.doEventsLoading = function () {
     form.getForeign('post','usuario');
     form.getForeign('post','documento');       

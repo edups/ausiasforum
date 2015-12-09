@@ -22,30 +22,40 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 @charset "UTF-8";
 
  body{
-      background: -webkit-linear-gradient(to left, #c2e59c , #64b3f4);
-      background: linear-gradient(to left, #c2e59c , #64b3f4); 
+/*      background: -webkit-linear-gradient(to left, #c2e59c , #64b3f4);
+      background: linear-gradient(to left, #c2e59c , #64b3f4); */
+background-color: #DDD;
 }
 #broth_panel_heading{
-   background: -webkit-linear-gradient(to right, #16222A , #3A6073);
-    background: linear-gradient(to right, #16222A , #3A6073); 
+
+background-image: url('../../images/fondo.jpg');
+background-repeat: no-repeat;
+background-size: cover;
 }
 #broth_title{
     text-align: center;
     text-transform: uppercase;
     text-decoration: underline;
-    color:azure;
+    color:white;
+}
+#broth_subtitle{
+        color: whitesmoke;
 }
 
 .cabeceraGlobal{
-     background-color:#C0C0C0; 
+     background-color:#9FDCE8; 
      border: 1px solid black;
      font-weight: bolder;
      border-radius: 5px;
      margin-left: 1px;
      margin-right: 1px;
+     color:white
      
 }
-
+h2{
+        color: steelblue;
+    font-weight: bold;
+}
 .post{
      border: 1px solid black;
      border-radius: 5px;
@@ -53,14 +63,15 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
      margin-top: 10px;
      margin-left: 2px;
      margin-right: 2px;
-     font-family: "Montserrat";
+     color:steelblue;
+     font-family: "Lato";
 }
 
 .panel-body{
-    background-color:#E0E0E0;
+    background-color:#F0FBFD;
 }
 
-#broth_operationicon{
+#broth_operationicon, .pull-right{
     color: white;
 }
 
@@ -92,4 +103,13 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
    margin-top:60px;
  
    text-align: right;
+}
+a,#btnFiltrarClient{
+    color:steelblue;
+}
+a:hover{
+    color: #00AED0;
+}
+.panel-footer{
+    background-color: #00AED0;
 }

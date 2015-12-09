@@ -79,7 +79,8 @@ function fPostRoutes() {
 //        $( "<style>background-color: black;</style>" ).appendTo( content );
 //           var myEstilo ="paquito.css";
         $('<link href="http://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css"/>').appendTo("head");
-        $('<link href="css/specific/documentohiloplist.css" rel="stylesheet" type="text/css"/>').appendTo("head");
+        $('<link href="http://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css"/>').appendTo("head");
+        $('<link href="css/specific/postplistb.css" rel="stylesheet" type="text/css"/>').appendTo("head");
         header.empty().append(fillDocumentoPageHeader('Listado de Posts'));
         var strParam = parameter.getUrlObjectFromUrlString(this.params['url']);
         ausiasFLOW.reset();

@@ -72,7 +72,7 @@ postPlist.prototype.getHeaderPageTableFunc = function (jsonMeta, strOb, UrlFromP
                     + thisObject.loadThButtons(oMeta, strOb, UrlFromParamsWithoutOrder)
                     + '</div>';
         } else if (oMeta.Name == "mensaje") {
-            return '<div class="col-md-7 col-md-offset-1 cabeceraTitulo">'
+            return '<div class="col-md-7 col-md-offset-2 cabeceraTitulo">'
                     + oMeta.ShortName
                     + '<br />'
                     + thisObject.loadThButtons(oMeta, strOb, UrlFromParamsWithoutOrder)
@@ -92,12 +92,7 @@ postPlist.prototype.getHeaderPageTableFunc = function (jsonMeta, strOb, UrlFromP
     } else {
         arr_meta_data_tableHeader_visibles = arr_meta_data_tableHeader;
     }
-    if (acciones) {
-        arr_meta_data_tableHeader_visibles_acciones = arr_meta_data_tableHeader_visibles.concat(['<div class="col-md-2">Acciones </div>']);
-    } else {
-        arr_meta_data_tableHeader_visibles_acciones = arr_meta_data_tableHeader_visibles;
-    }
-    return '<div class="row cabeceraGlobal">' + arr_meta_data_tableHeader_visibles_acciones.join('') + '</div>';
+    return '<div class="row cabeceraGlobal">' + arr_meta_data_tableHeader_visibles.join('') + '</div>';
 }
 postPlist.prototype.getBodyPageTableFunc = function (meta, page, printPrincipal, tdButtons_function, trPopup_function, visibles) {
     //thisObject.jsonData.message.page.list: es un array de objetos. Cada objeto contiene una fila de la tabla de la petición
@@ -110,7 +105,7 @@ postPlist.prototype.getBodyPageTableFunc = function (meta, page, printPrincipal,
 
     //Filtra los campos del array de objetos recogiendo los que son necesarios en nuestro caso
     matrix_meta_data_filtered = _.map(matrix_meta_data, function (oFilter) {
-        return _.pick(oFilter, 0, 3, 4);
+        return _.pick(oFilter, 0, 1, 3, 4);
     });
     //is an array (rpp) of arrays (rows) of objects
     //every object contains the data and its metadata
@@ -118,27 +113,33 @@ postPlist.prototype.getBodyPageTableFunc = function (meta, page, printPrincipal,
         return (_.map(matrix_meta_data_filtered[key], function (value2, key2) {
             //  return  '<div class="col-md-1 matriz">' + printPrincipal(value2) + '</div>';
 
-            if (value2.meta.Name == "mensaje") {
-                return         '<div class="post">'
-                        + '<div class="col-md-1 icono">'
-                        + '<i class="fa fa-list-ul fa-1x"></i>'
+            if (value2.meta.Name == "obj_usuario") {
+                var user = matrix_meta_data_filtered[key][1].data.bean.login;
+                var userid = matrix_meta_data_filtered[key][1].data.bean.id;
+                return         '<div class="row post">'
+//                        + '<div class="col-md-1 icono">'
+//                        + '<i class="fa fa-list-ul fa-1x"></i>'
 
-                        + '</div>'
+//                        + '</div>'
 
-                        + '<div class="col-md-7  titulo">'
-
-                        + printPrincipal(value2)
+                        + '<div class="col-md-2  col-xs-3 usuario">'
+                        + '<i class="fa fa-user fa-4x"></i>'
+                        +'</br>'
+                        +'<a href="#/usuario/view/' + userid + '">'
+                        + user
+                        +'</a>'
+//                        + printPrincipal(value2)
                         + '</div>'
             } else {
 
-                return '<div class="col-md-2 matriz">'
+                return '<div class="col-md-4 col-xs-3 matriz">'
                         + printPrincipal(value2)
                         + '</div>';
             }
         })
                 )
                 .slice(1, parseInt(visibles))
-                .concat(['<div class="botns">' + tdButtons_function(value, strOb) + '</div></div>']);
+                .concat(['<div class="col-md-1  col-xs-1 botns">' + tdButtons_function(value, strOb) + '</div></div>']);
     });
     //is an array (rpp) of arrays (rows) of strings
     //every string contains the data of the table cell
@@ -151,7 +152,8 @@ postPlist.prototype.getBodyPageTableFunc = function (meta, page, printPrincipal,
     //is an array (rpp) of strings 
     //where every string is a ...
     var str_meta_data_table_buttons_reduced_reduced = _.reduce(arr_meta_data_table_buttons_reduced, function (memo, num) {
-        return memo + '<div class="numero">' + num + '</div>';
+//        return memo + '<div class="numero">' + num + '</div>';
+        return memo + num;
     });
     //is a string that contains the table body
     return str_meta_data_table_buttons_reduced_reduced;
@@ -263,4 +265,15 @@ postPlist.prototype.filterFormClientTemplate = function (id) {
                             )
                     )
             );
+};
+
+
+postPlist.prototype.loadButtons = function (rowValues, strClass) {
+    var botonera = "";
+    botonera += '<div class="btn-toolbar" role="toolbar"><div class="btn-group btn-group-xs">';
+//    botonera += '<a class="btn btn-default view" id="' + rowValues[0].data + '"  href="#/' + strClass + '/view/' + rowValues[0].data + '"><i class="glyphicon glyphicon-eye-open"></i></a>';
+    botonera += '<a class="btn btn-default edit" id="' + rowValues[0].data + '"  href="#/' + strClass + '/edit/' + rowValues[0].data + '"><i class="glyphicon glyphicon-pencil"></i></a>';
+    botonera += '<a class="btn btn-default remove" id="' + rowValues[0].data + '"  href="#/' + strClass + '/remove/' + rowValues[0].data + '"><i class="glyphicon glyphicon-remove"></i></a>';
+    botonera += '</div></div>';
+    return botonera;
 };
