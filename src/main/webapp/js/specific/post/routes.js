@@ -36,6 +36,9 @@ function fPostRoutes() {
 
     //--------------------------------------------------------------------------
     Path.map("#/" + strClass + "/remove/:id").to(function () {
+        $('<link href="http://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css"/>').appendTo("head");
+        $('<link href="http://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css"/>').appendTo("head");
+        $('<link href="css/specific/basestyles.css" rel="stylesheet" type="text/css"/>').appendTo("head");
         header.empty().append(fillDocumentoPageHeader('Remove'));
         var strParam = parameter.getUrlObjectFromUrlString(this.params['url']);
         ausiasFLOW.reset();
@@ -44,6 +47,9 @@ function fPostRoutes() {
     });
     //--------------------------------------------------------------------------
     Path.map("#/" + strClass + "/new(/:url)").to(function () {
+        $('<link href="http://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css"/>').appendTo("head");
+        $('<link href="http://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css"/>').appendTo("head");
+        $('<link href="css/specific/basestyles.css" rel="stylesheet" type="text/css"/>').appendTo("head");
         header.empty().append(fillDocumentoPageHeader('New'));
         var strParam = parameter.getUrlObjectFromUrlString(this.params['url']);
         ausiasFLOW.reset();
@@ -52,6 +58,9 @@ function fPostRoutes() {
     });
     //--------------------------------------------------------------------------    
     Path.map("#/" + strClass + "/edit/:url").to(function () {
+        $('<link href="http://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css"/>').appendTo("head");
+        $('<link href="http://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css"/>').appendTo("head");
+        $('<link href="css/specific/basestyles.css" rel="stylesheet" type="text/css"/>').appendTo("head");
         header.empty().append(fillDocumentoPageHeader('Edit'));
         var strParam = parameter.getUrlObjectFromUrlString(this.params['url']);
         ausiasFLOW.reset();
@@ -60,6 +69,9 @@ function fPostRoutes() {
     });
     //--------------------------------------------------------------------------
     Path.map("#/" + strClass + "/view/:id").to(function () {
+        $('<link href="http://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css"/>').appendTo("head");
+        $('<link href="http://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css"/>').appendTo("head");
+        $('<link href="css/specific/basestyles.css" rel="stylesheet" type="text/css"/>').appendTo("head");
         header.empty().append(fillDocumentoPageHeader('View'));
         var strParam = parameter.getUrlObjectFromUrlString(this.params['url']);
         ausiasFLOW.reset();
@@ -68,6 +80,9 @@ function fPostRoutes() {
     });
     //--------------------------------------------------------------------------    
     Path.map("#/" + strClass + "/list(/:url)").to(function () {
+        $('<link href="http://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css"/>').appendTo("head");
+        $('<link href="http://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css"/>').appendTo("head");
+        $('<link href="css/specific/basestyles.css" rel="stylesheet" type="text/css"/>').appendTo("head");
         header.empty().append(fillDocumentoPageHeader('List'));
         var strParam = parameter.defaultizeUrlObjectParametersForLists(parameter.getUrlObjectFromUrlString(this.params['url']));
         ausiasFLOW.reset();
@@ -80,7 +95,7 @@ function fPostRoutes() {
 //           var myEstilo ="paquito.css";
         $('<link href="http://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css"/>').appendTo("head");
         $('<link href="http://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css"/>').appendTo("head");
-        $('<link href="css/specific/postplistb.css" rel="stylesheet" type="text/css"/>').appendTo("head");
+        $('<link href="css/specific/basestyles.css" rel="stylesheet" type="text/css"/>').appendTo("head");
         header.empty().append(fillDocumentoPageHeader('Listado de Posts'));
         var strParam = parameter.getUrlObjectFromUrlString(this.params['url']);
         ausiasFLOW.reset();
@@ -88,6 +103,9 @@ function fPostRoutes() {
         return false;
     });
     Path.map("#/" + strClass + "/postdocumento(/:url)").to(function () {
+        $('<link href="http://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css"/>').appendTo("head");
+        $('<link href="http://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css"/>').appendTo("head");
+        $('<link href="css/specific/basestyles.css" rel="stylesheet" type="text/css"/>').appendTo("head");
 //        
         header.empty().append(fillDocumentoPageHeader('Listado de Hilos'));
         var strParam = parameter.getUrlObjectFromUrlString(this.params['url']);
