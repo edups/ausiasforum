@@ -49,3 +49,85 @@ postNew.prototype.doEventsLoading = function () {
     form.getForeign('post','usuario');
     form.getForeign('post','documento');       
 };
+
+//modal2 = {
+//    getEmptyModal: function (name) {
+//        var modal = '<div id="' + name + '" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">';
+//        modal += '<div class="modal-dialog modal-lg">';
+//        modal += '<div class="modal-content">';
+//        modal += '<div class="modal-header" id="modal-header"></div>';
+//        modal += '<div class="modal-body" id="modal-body"></div>';
+//        modal += '<div class="modal-footer" id="modal-footer"></div>';
+//        modal += '</div>';
+//        modal += '</div>';
+//        modal += '</div>';
+//        return modal;
+//    },
+//    load: function (modalName, keyb) {
+//        $(modalName).modal({
+//            keyboard: keyb
+//        })
+//    },
+//    loadModal: function (modalName, headerData, bodyData, footerData, keyb) {
+//        $(modalName + ' .modal-header').empty().append(headerData);
+//        $(modalName + ' .modal-body').empty().append(bodyData);
+//        $(modalName + ' .modal-footer').empty().append(footerData);
+//        $(modalName).modal({
+//            keyboard: keyb
+//        })
+//    },
+//    getModalHeader: function (title) {
+//        cabecera = '<button id="full-width" type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>';
+//        cabecera += '<h1 id="myModalLabel">' + title + '</h1>';
+//        return cabecera;
+//    },
+//    getModalFooter: function () {
+//       // pie=    '<button class="btn btn-primary" data-dismiss="modal" aria-hidden="true" id="hilo">Ver el hilo nuevo</button>'
+//        pie = '<button class="btn btn-primary" data-dismiss="modal" aria-hidden="true" id="foro">Ir al post</button>';
+//        return pie;
+//    },
+//    loadModalNotify: function (place, message, afterNotifyFunction) {
+//        $(place).append(modal2.getEmptyModal('modal01'));
+//        modal2.loadModal('#modal01', modal2.getModalHeader('Respuesta del servidor'), message, modal2.getModalFooter(), true);
+//        $('#modal01').css({'right': '20px', 'left': '20px', 'width': 'auto', 'margin': '10px', 'display': 'block'});
+//        $('#modal01').on('hidden.bs.modal', afterNotifyFunction);
+//    }
+//}
+//
+//postNew.prototype.bind = function () {
+//    validation.loadValidationCallbacks(jsonData.message);
+//    this.doEventsLoading();
+//    $('#submitForm').unbind('click');
+//    $('#submitForm').click(function (e) {
+//        // okValidation(function (e) { ...
+//        var strValues = array.identificarArray(form.getFormValues(strClass));
+//        
+//                
+//        promise.setOne(strClass, {json: JSON.stringify(strValues)}).done(function (result) {
+//            if (result["status"] == "200") {
+//                resultadoMessage = 'Se ha creado el registro con id=' + result["message"];
+//                     } else {
+//                resultadoMessage = "ERROR: No se ha creado el registro";
+//            }
+//            var mensaje = "<h5>Código: " + result["status"] + "</h5><h5>" + resultadoMessage + "</h5>";
+//            modal2.loadModalNotify($('#broth_modal'), mensaje, function () {
+//                
+//                
+//                                          
+//               window.location.href = "#/post/plist/rpp=10&vf=10&systemfilter=obj_documento&systemfilteroperator=equals&systemfiltervalue=" + tema; 
+//                          
+//                
+//                
+//                
+//                
+//                $('#broth_modal').empty();
+//            }, function () {
+//                $('#broth_content').empty();
+//                $('#broth_modal').empty();
+//            });
+//        });
+//        e.preventDefault();
+//        return false;
+//    });
+//    
+//}
