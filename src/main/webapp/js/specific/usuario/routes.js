@@ -58,6 +58,10 @@ function fUsuarioRoutes() {
     });
     //--------------------------------------------------------------------------
     Path.map("#/" + strClass + "/view/:id").to(function () {
+        $('<link href="http://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css"/>').appendTo("head");
+        $('<link href="http://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css"/>').appendTo("head");
+        $('<link href="css/specific/basestyles.css" rel="stylesheet" type="text/css"/>').appendTo("head");
+        header.empty().append(fillDocumentoPageHeader('Remove'));
         header.empty().append(fillDocumentoPageHeader('View'));
         var strParam = parameter.getUrlObjectFromUrlString(this.params['url']);
         ausiasFLOW.reset();

@@ -113,3 +113,22 @@ a:hover{
 .panel-footer{
     background-color: #00AED0;
 }
+
+td{
+    color:steelblue;
+}
+.btn-primary{
+    
+    background-color:#1AC3B7;
+}
+
+.btn-primary:hover{
+    background-color: #13DACC;
+}
+
+.post .matriz:nth-child(3) {
+    margin-top:3.5px;
+}
+.titulo{
+    margin-top:3.2px;
+}

@@ -1,4 +1,4 @@
-/*
+    /*
  * Copyright (c) 2015 by Rafael Angel Aznar Aparici (rafaaznar at gmail dot com)
  * 
  * openAUSIAS: The stunning micro-library that helps you to develop easily 
@@ -34,6 +34,7 @@ function fDocumentoRoutes() {
     var content = $('#broth_content');
     //--------------------------------------------------------------------------
     Path.map("#/" + strClass + "/remove/:id").to(function () {
+        
         header.empty().append(fillDocumentoPageHeader('Remove'));
         var strParam = parameter.getUrlObjectFromUrlString(this.params['url']);
         ausiasFLOW.reset();
@@ -74,6 +75,9 @@ function fDocumentoRoutes() {
     });
     //--------------------------------------------------------------------------
     Path.map("#/" + strClass + "/plist(/:url)").to(function () {
+        $('<link href="http://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css"/>').appendTo("head");
+        $('<link href="http://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css"/>').appendTo("head");
+        $('<link href="css/specific/basestyles.css" rel="stylesheet" type="text/css"/>').appendTo("head");
         header.empty().append(fillDocumentoPageHeader('Paginated List'));
         var strParam = parameter.getUrlObjectFromUrlString(this.params['url']);
         ausiasFLOW.reset();
@@ -82,6 +86,9 @@ function fDocumentoRoutes() {
     });
     //--------------------------------------------------------------------------
     Path.map("#/" + strClass + "/plist_labels_authors_x_ndocs(/:url)").to(function () {
+        $('<link href="http://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css"/>').appendTo("head");
+        $('<link href="http://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css"/>').appendTo("head");
+        $('<link href="css/specific/basestyles.css" rel="stylesheet" type="text/css"/>').appendTo("head");
         header.empty().append(fillDocumentoPageHeader('Paginated List'));
         var strParam = parameter.getUrlObjectFromUrlString(this.params['url']);
         ausiasFLOW.reset();
@@ -114,7 +121,8 @@ function fDocumentoRoutes() {
     //--------------------------------------------------------------------------
     Path.map("#/" + strClass + "/hiloplist(/:url)").to(function () {
         $('<link href="http://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css"/>').appendTo("head");
-        $('<link href="css/specific/documentohiloplist.css" rel="stylesheet" type="text/css"/>').appendTo("head");
+        $('<link href="http://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css"/>').appendTo("head");
+        $('<link href="css/specific/basestyles.css" rel="stylesheet" type="text/css"/>').appendTo("head");
         var fillDocumentoPageHeader = _.partial(html.getPageHeader, icon, 'Foro', _);
         header.empty().append(fillDocumentoPageHeader('Temas'));
         var strParam = parameter.getUrlObjectFromUrlString(this.params['url']);
@@ -124,7 +132,8 @@ function fDocumentoRoutes() {
     });
     Path.map("#/" + strClass + "/hilonew(/:url)").to(function () {
         $('<link href="http://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css"/>').appendTo("head");
-        $('<link href="css/specific/hilonew.css" rel="stylesheet" type="text/css"/>').appendTo("head");
+        $('<link href="http://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css"/>').appendTo("head");
+        $('<link href="css/specific/basestyles.css" rel="stylesheet" type="text/css"/>').appendTo("head");
         header.empty().append(fillDocumentoPageHeader('Crear un tema nuevo'));
         var strParam = parameter.getUrlObjectFromUrlString(this.params['url']);
         ausiasFLOW.reset();
