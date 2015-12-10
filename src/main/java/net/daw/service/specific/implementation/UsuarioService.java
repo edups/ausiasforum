@@ -85,10 +85,10 @@ public class UsuarioService extends TableServiceGenImpl {
             strAnswer = "Already logged in";
         }
 //        return JsonMessage.getJsonMsg(strCode, strAnswer);
-        return "{\"status\":"+strCode+",\"message\":\""+strAnswer+"\",\"id\":"+strIdUsuario+"}";
+        return "{\"status\":" + strCode + ",\"message\":\"" + strAnswer + "\",\"id\":" + strIdUsuario + "}";
     }
 
-    public String logout() {        
+    public String logout() {
         oRequest.getSession().invalidate();
         return JsonMessage.getJsonMsg("200", "Bye");
     }
@@ -99,7 +99,7 @@ public class UsuarioService extends TableServiceGenImpl {
         if (oUserBean == null) {
             return JsonMessage.getJsonMsg("403", "ERROR: You don't have permission to perform this operation");
         } else {
-            return "{\"status\":200,\"message\":\""+oUserBean.getLogin()+"\",\"id\":"+oUserBean.getId()+"}";
+            return "{\"status\":200,\"message\":\"" + oUserBean.getLogin() + "\",\"id\":" + oUserBean.getId() + "}";
         }
     }
 

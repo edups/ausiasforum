@@ -40,13 +40,12 @@ import net.daw.dao.specific.implementation.DocumentoDao;
 import net.daw.dao.specific.implementation.PostDao;
 import net.daw.helper.statics.ParameterCook;
 
-
 public class PostService extends TableServiceGenImpl {
 
     public PostService(HttpServletRequest request) {
         super(request);
     }
-    
+
     @Override
     public String set() throws Exception {
 
@@ -55,7 +54,7 @@ public class PostService extends TableServiceGenImpl {
         PostBean oPostBean = new PostBean();
         String json = ParameterCook.prepareJson(oRequest);
         Gson gson = new GsonBuilder().setDateFormat("dd/MM/yyyy").excludeFieldsWithoutExposeAnnotation().create();
-        
+
         oPostBean = gson.fromJson(json, PostBean.class);
         oPostBean = oPostDao.set(oPostBean);
         Map<String, String> data = new HashMap<>();
@@ -64,6 +63,5 @@ public class PostService extends TableServiceGenImpl {
         String resultado = gson.toJson(data);
         return resultado;
     }
-    
-    
+
 }

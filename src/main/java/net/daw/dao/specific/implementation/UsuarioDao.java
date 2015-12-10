@@ -130,7 +130,6 @@ public class UsuarioDao extends TableDaoGenImpl<UsuarioBean> {
 //        }
 //        return oUsuarioBean;
 //    }
-
 //    public UsuarioBean type(UsuarioBean oUsuarioBean) throws Exception {
 //
 //        try {

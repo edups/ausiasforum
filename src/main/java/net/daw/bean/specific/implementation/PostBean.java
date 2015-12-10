@@ -81,8 +81,7 @@ public class PostBean extends BeanGenImpl implements BeanInterface {
             MyIdName = "id_usuario"
     )
     private GroupBeanImpl obj_usuario = null;
-    
-    
+
     @Expose(serialize = false)
     @MethodMetaInformation(
             UltraShortName = "Doc.",
@@ -104,7 +103,7 @@ public class PostBean extends BeanGenImpl implements BeanInterface {
             MyIdName = "id_documento"
     )
     private GroupBeanImpl obj_documento = null;
-     
+
     @Expose
     @MethodMetaInformation(
             UltraShortName = "Mens.",

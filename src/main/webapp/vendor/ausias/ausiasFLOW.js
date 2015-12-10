@@ -87,11 +87,11 @@
             this.dataRenderFillAndBind(oComponent);
         });
     };
-    ausiasFLOW.renderFillAndBindAll = function () { 
+    ausiasFLOW.renderFillAndBindAll = function () {
         componentsList.forEach(function (oComponent) {
             this.renderFillAndBind(oComponent);
         });
-    };    
+    };
     ausiasFLOW.getComponentByModuleName = function (name) {
         //return the module named 'name'
         var dev = null;

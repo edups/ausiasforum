@@ -40,7 +40,6 @@ public class PostDao extends TableDaoGenImpl<PostBean> {
         super(pooledConnection);
     }
 
-
     @Override
     public PostBean set(PostBean oPostBean) throws Exception {
 
@@ -60,12 +59,12 @@ public class PostDao extends TableDaoGenImpl<PostBean> {
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             oPostBean.setFecha(date);
             String str_fecha = formatter.format(oPostBean.getFecha());
-            
+
             oMysql.updateOne(oPostBean.getId(), strTableOrigin, "fecha", str_fecha);
         } catch (Exception e) {
             throw new Exception(this.getClass().getName() + ".set: Error: " + e.getMessage());
         }
         return oPostBean;
     }
-    
+
 }

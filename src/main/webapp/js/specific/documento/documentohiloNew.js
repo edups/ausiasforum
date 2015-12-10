@@ -28,47 +28,47 @@
 var documentohiloNew = function () {
 };
 documentohiloNew.prototype = new newModule();
- 
+
 //documentohiloNew.prototype.doEventsLoading = function () {
-    documentohiloNew.prototype.render = function () {
+documentohiloNew.prototype.render = function () {
     if (jsonData.status == "200") {
-     jsonData_filtered = _.filter(jsonData.message, function(oItem){
-        if (oItem.Name=="id" || oItem.Name=="titulo" || oItem.Name =="obj_tipodocumento") {
-            return true;
-        } else {
-            return false;
-        }
-    } );
-            return form.getFormTemplate(strClass, jsonData_filtered);
+        jsonData_filtered = _.filter(jsonData.message, function (oItem) {
+            if (oItem.Name == "id" || oItem.Name == "titulo" || oItem.Name == "obj_tipodocumento") {
+                return true;
+            } else {
+                return false;
+            }
+        });
+        return form.getFormTemplate(strClass, jsonData_filtered);
     } else {
         return util.notifyException(jsonData.status, jsonData.message);
     }
-    
+
 };
 form2 = {
- gethilo: function (obMain, obForeign) {
+    gethilo: function (obMain, obForeign) {
 //        $('#' + obMain + 'Form #obj_' + obForeign + '_button').unbind('click');
 //        $('#' + obMain + 'Form #obj_' + obForeign + '_button').click(function () {
 //            $('#' + obMain + 'Form').append(modal.getEmptyModal('modal01'));
 //            modal.loadModal('#modal01', modal.getModalHeader('Elección de ' + obForeign), "", modal.getModalFooter(), true);
 //            ausiasFLOW.initialize(ebpListModule, $('#modal-body'), obForeign , 'plist', {"vf": 4}, function (id) {
-                $('#obj_' + obForeign).val(1);
-                promise.getOne(obForeign, 1).done(function (json) {
-                    $('#obj_' + obForeign + '_desc').html(html.printObject2(obForeign, json.message.meta.message,json.message.bean.message));
-                });
+        $('#obj_' + obForeign).val(1);
+        promise.getOne(obForeign, 1).done(function (json) {
+            $('#obj_' + obForeign + '_desc').html(html.printObject2(obForeign, json.message.meta.message, json.message.bean.message));
+        });
 //                $('#modal01').modal('hide');
 //            });
 //            return false;
 //        });
 
 
-}
+    }
 }
 
- documentohiloNew.prototype.doEventsLoading = function () {
-   form.getForeign('documento','usuario'); 
-   form2.gethilo('documento','tipodocumento');     
-   
+documentohiloNew.prototype.doEventsLoading = function () {
+    form.getForeign('documento', 'usuario');
+    form2.gethilo('documento', 'tipodocumento');
+
 };
 modal2 = {
     getEmptyModal: function (name) {
@@ -102,7 +102,7 @@ modal2 = {
         return cabecera;
     },
     getModalFooter: function () {
-       // pie=    '<button class="btn btn-primary" data-dismiss="modal" aria-hidden="true" id="hilo">Ver el hilo nuevo</button>'
+        // pie=    '<button class="btn btn-primary" data-dismiss="modal" aria-hidden="true" id="hilo">Ver el hilo nuevo</button>'
         pie = '<button class="btn btn-primary" data-dismiss="modal" aria-hidden="true" id="foro">Ir al foro</button>';
         return pie;
     },
@@ -113,9 +113,6 @@ modal2 = {
         $('#modal01').on('hidden.bs.modal', afterNotifyFunction);
     }
 }
-
-
-
 
 documentohiloNew.prototype.bind = function () {
     validation.loadValidationCallbacks(jsonData.message);
@@ -132,14 +129,9 @@ documentohiloNew.prototype.bind = function () {
             }
             var mensaje = "<h5>Código: " + result["status"] + "</h5><h5>" + resultadoMessage + "</h5>";
             modal2.loadModalNotify($('#broth_modal'), mensaje, function () {
-                
-               window.location.href = "#/documento/hiloplist/page=1&rpp=10&vf=10&systemfilter=obj_tipodocumento&systemfilteroperator=equals&systemfiltervalue=1"; 
-               
-                
-                
-                
-                
-                
+
+                window.location.href = "#/documento/hiloplist/page=1&rpp=10&vf=10&systemfilter=obj_tipodocumento&systemfilteroperator=equals&systemfiltervalue=1";
+
                 $('#broth_modal').empty();
             }, function () {
                 $('#broth_content').empty();
@@ -149,5 +141,5 @@ documentohiloNew.prototype.bind = function () {
         e.preventDefault();
         return false;
     });
-    
+
 }

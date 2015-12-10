@@ -30,6 +30,6 @@ var postEdit = function () {
 };
 postEdit.prototype = new editModule();
 postEdit.prototype.doEventsLoading = function () {
-    form.getForeign('post','usuario');
-    form.getForeign('post','documento');       
+    form.getForeign('post', 'usuario');
+    form.getForeign('post', 'documento');
 };

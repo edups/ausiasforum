@@ -27,7 +27,7 @@
  */
 
 postPlist = function () {
-    
+
 };
 postPlist.prototype = new pListModule();
 postPlist.prototype.getTitle = function (jsonData) {
@@ -124,10 +124,10 @@ postPlist.prototype.getBodyPageTableFunc = function (meta, page, printPrincipal,
 
                         + '<div class="col-md-2  col-xs-3 usuario">'
                         + '<i class="fa fa-user fa-4x"></i>'
-                        +'</br>'
-                        +'<a href="#/usuario/view/' + userid + '">'
+                        + '</br>'
+                        + '<a href="#/usuario/view/' + userid + '">'
                         + user
-                        +'</a>'
+                        + '</a>'
 //                        + printPrincipal(value2)
                         + '</div>'
             } else {
@@ -257,7 +257,7 @@ postPlist.prototype.filterFormClientTemplate = function (id) {
                     dom.div('class="col-md-12"',
                             dom.p('',
                                     dom.form('class="navbar-form navbar-right" role="form" action="Controller" method="post" id="empresaForm"',
-                                            dom.a('class="btn btn-default cbo" href="#/post/new/usuario=' + id_session_user + '&documento='+id+'"', 'Nuevo post') +
+                                            dom.a('class="btn btn-default cbo" href="#/post/new/usuario=' + id_session_user + '&documento=' + id + '"', 'Nuevo post') +
                                             dom.input('id="inputFiltervalueClient" class="form-control" name="filtervalue" type="text" size="20" maxlength="50" value=""  width="100" style="width: 140px" placeholder="Buscar ..."') +
                                             dom.input('type="submit" class="btn" id="btnFiltrarClient" name="btnFiltrarClient" value="Buscar"')
                                             )

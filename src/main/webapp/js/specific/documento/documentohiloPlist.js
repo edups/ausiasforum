@@ -119,10 +119,6 @@ documentohiloPlist.prototype.getHeaderPageTableFunc = function (jsonMeta, strOb,
         }
     });
 
-
-
-
-
     //visibles
     if (visibles) {
         arr_meta_data_tableHeader_visibles = arr_meta_data_tableHeader.slice(1, parseInt(visibles));
@@ -155,10 +151,10 @@ documentohiloPlist.prototype.getBodyPageTableFunc = function (meta, page, printP
         return (_.map(matrix_meta_data_filtered[key], function (value2, key2) {
 //            return  
             var dataid = matrix_meta_data_filtered[key][0].data;
-           
+
             if (value2.meta.Name == "titulo") {
                 return   '<div class="row post">'
-                        +  '<div class="col-md-1 icono">'
+                        + '<div class="col-md-1 icono">'
                         + '<i class="fa fa-list-alt fa-2x"></i>'
 
                         + '</div>'

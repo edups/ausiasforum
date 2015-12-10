@@ -39,22 +39,6 @@ public class DocumentoDao extends TableDaoGenImpl<DocumentoBean> {
         super(pooledConnection);
     }
 
-//    public String getDescription(int id) throws Exception {
-//        DocumentoBean oDocumentoBean = new DocumentoBean();
-//        oDocumentoBean.setId(id);
-//        oDocumentoBean = this.get(oDocumentoBean);
-//        String description;
-//        if (oDocumentoBean.getTitulo().length() > 20) {
-//            description = oDocumentoBean.getTitulo().substring(0, 19) + "...";
-//        } else {
-//            description = oDocumentoBean.getTitulo();
-//        }
-//        description += " (" + oDocumentoBean.getHits().toString() + " hits)";
-//        return description;
-//    }
-    
-    
-    
     @Override
     public DocumentoBean set(DocumentoBean oDocumentoBean) throws Exception {
 
@@ -72,14 +56,12 @@ public class DocumentoDao extends TableDaoGenImpl<DocumentoBean> {
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             oDocumentoBean.setAlta(date);
             String str_fecha = formatter.format(oDocumentoBean.getAlta());
-            
+
             oMysql.updateOne(oDocumentoBean.getId(), strTableOrigin, "alta", str_fecha);
         } catch (Exception e) {
             throw new Exception(this.getClass().getName() + ".set: Error: " + e.getMessage());
         }
         return oDocumentoBean;
     }
-    
+
 }
-
-

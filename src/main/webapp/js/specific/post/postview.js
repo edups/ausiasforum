@@ -34,19 +34,20 @@ postView.prototype.getViewTemplate_func = function (strClass, jsonDataViewModule
     var jsonBean = jsonDataViewModule.bean.message;
     var valor;
     for (var k in jsonMeta) {
-        var cabecera = jsonMeta[k].ShortName;        
-        if (jsonMeta[k].IsObjForeignKey){
-            nombre_obj=jsonMeta[k].Name;
-            valor= {data: jsonBean[nombre_obj], meta:jsonMeta[k]};            
+        var cabecera = jsonMeta[k].ShortName;
+        if (jsonMeta[k].IsObjForeignKey) {
+            nombre_obj = jsonMeta[k].Name;
+            valor = {data: jsonBean[nombre_obj], meta: jsonMeta[k]};
         } else {
             valor = jsonBean[jsonMeta[k].Name];
-        }                
-        var resultado= html.printPrincipal(valor);
+        }
+        var resultado = html.printPrincipal(valor);
 //        valor = html.printPrincipal(jsonMeta[k]);
         tabla += '<tr><td><strong>' + cabecera + '</strong></td><td>' + resultado + '</td></tr>';
 
     }
     tabla += '</table>';
+    //tabla += '<button class="btn btn-primary">Volver al foro</button>';
     return tabla;
 
 }
