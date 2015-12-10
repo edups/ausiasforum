@@ -29,7 +29,6 @@ var documentohiloNew = function () {
 };
 documentohiloNew.prototype = new newModule();
 
-//documentohiloNew.prototype.doEventsLoading = function () {
 documentohiloNew.prototype.render = function () {
     if (jsonData.status == "200") {
         jsonData_filtered = _.filter(jsonData.message, function (oItem) {
@@ -47,21 +46,10 @@ documentohiloNew.prototype.render = function () {
 };
 form2 = {
     gethilo: function (obMain, obForeign) {
-//        $('#' + obMain + 'Form #obj_' + obForeign + '_button').unbind('click');
-//        $('#' + obMain + 'Form #obj_' + obForeign + '_button').click(function () {
-//            $('#' + obMain + 'Form').append(modal.getEmptyModal('modal01'));
-//            modal.loadModal('#modal01', modal.getModalHeader('Elección de ' + obForeign), "", modal.getModalFooter(), true);
-//            ausiasFLOW.initialize(ebpListModule, $('#modal-body'), obForeign , 'plist', {"vf": 4}, function (id) {
         $('#obj_' + obForeign).val(1);
         promise.getOne(obForeign, 1).done(function (json) {
             $('#obj_' + obForeign + '_desc').html(html.printObject2(obForeign, json.message.meta.message, json.message.bean.message));
         });
-//                $('#modal01').modal('hide');
-//            });
-//            return false;
-//        });
-
-
     }
 }
 
@@ -102,7 +90,6 @@ modal2 = {
         return cabecera;
     },
     getModalFooter: function () {
-        // pie=    '<button class="btn btn-primary" data-dismiss="modal" aria-hidden="true" id="hilo">Ver el hilo nuevo</button>'
         pie = '<button class="btn btn-primary" data-dismiss="modal" aria-hidden="true" id="foro">Ir al foro</button>';
         return pie;
     },

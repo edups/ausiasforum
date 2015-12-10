@@ -47,7 +47,6 @@ postView.prototype.getViewTemplate_func = function (strClass, jsonDataViewModule
 
     }
     tabla += '</table>';
-    //tabla += '<button class="btn btn-primary">Volver al foro</button>';
     return tabla;
 
 }

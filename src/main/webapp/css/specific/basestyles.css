@@ -102,7 +102,7 @@ h2{
 .post .matriz:nth-child(3){
    margin-top:60px;
  
-   text-align: right;
+   text-align: left;
 }
 a,#btnFiltrarClient{
     color:steelblue;

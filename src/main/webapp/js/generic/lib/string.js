@@ -37,7 +37,7 @@ string = {
         }
     },
     clipString: function (strResult, charsToClipStart) {
-        charsToClipStart = string.defaultizeValue(charsToClipStart, 40);
+        charsToClipStart = string.defaultizeValue(charsToClipStart, 2000);
         if (typeof strResult === 'string') {
             if (strResult.length > charsToClipStart)
                 return strResult.substr(0, charsToClipStart).trim() + " ...";

@@ -33,11 +33,6 @@ documentohiloPlist.prototype = new pListModule();
 documentohiloPlist.prototype.loadButtons = function (rowValues, strClass) {
     var botonera = "";
     botonera += '<div class="btn-toolbar" role="toolbar"><div class="btn-group btn-group-xs">';
-//    botonera += '<a class="btn btn-default view" id="' + rowValues[0].data + '"  href="#/' + strClass + '/view/' + rowValues[0].data + '"><i class="glyphicon glyphicon-eye-open"></i></a>';
-//    botonera += '<a class="btn btn-default edit" id="' + rowValues[0].data + '"  href="#/' + strClass + '/edit/' + rowValues[0].data + '"><i class="glyphicon glyphicon-pencil"></i></a>';
-//    botonera += '<a class="btn btn-default remove" id="' + rowValues[0].data + '"  href="#/' + strClass + '/remove/' + rowValues[0].data + '"><i class="glyphicon glyphicon-remove"></i></a>';
-    //provisional para crear nuevo, hasta que decidamos donde añadirlo
-
     botonera += '<a class="btn btn-default cbo" id="' + rowValues[0].data + '"  href="#/post/plist/rpp=10&vf=10&systemfilter=obj_documento&systemfilteroperator=equals&systemfiltervalue=' + rowValues[0].data + '"><i class="fa fa-gamepad fa-1x"></i></a>';
     botonera += '</div></div>';
     return botonera;
@@ -46,42 +41,6 @@ documentohiloPlist.prototype.loadButtons = function (rowValues, strClass) {
 documentohiloPlist.prototype.loadThButtons = function (meta, strClase, UrlFromParamsWithoutOrder) {
     return button.getTableHeaderButtons(meta.Name, strClase, 'hiloplist', UrlFromParamsWithoutOrder);
 }
-
-//    documentohiloPlist.prototype.printValue = function (value) {
-//        switch (value.meta.Type) {
-//            case 'Boolean':
-//                if (value.data == true) {
-//                    return html.getIcon('glyphicon-ok');
-//                } else {
-//                    return html.getIcon('glyphicon-remove');
-//                }
-//                break;
-//            default:
-//                return html.print(value.data);
-//        }
-//    };
-//    documentohiloPlist.prototype.printPrincipal = function (value) {
-//        if (value.meta) {
-//            if (value.meta.IsObjForeignKey) {
-//                return  html.printObject2(value.meta.ReferencesTable, value.data.meta, value.data.bean);
-//            } else {
-//                return   html.printValue(value);
-//            }
-//        } else {
-//            return html.print(value);
-//        }
-//    }
-//    documentohiloPlist.prototype.miClipString = function (strResult, charsToClipStart) {
-//        charsToClipStart = string.defaultizeValue(charsToClipStart, 60);
-//        if (typeof strResult === 'string') {
-//            if (strResult.length > charsToClipStart)
-//                return strResult.substr(0, charsToClipStart).trim() + " ...";
-//            else
-//                return strResult.trim();
-//        } else {
-//            return strResult;
-//        }
-//    }
 
 
 
@@ -110,8 +69,7 @@ documentohiloPlist.prototype.getHeaderPageTableFunc = function (jsonMeta, strOb,
                     + thisObject.loadThButtons(oMeta, strOb, UrlFromParamsWithoutOrder)
                     + '</div>';
         } else {
-            return  '<div class="col-md-4 cabeceraCuerpo">'
-//                    + oMeta.ShortName
+            return  '<div class="col-md-2  cabeceraCuerpo">'
                     + 'Fecha de Creación'
                     + '<br />'
                     + thisObject.loadThButtons(oMeta, strOb, UrlFromParamsWithoutOrder)
@@ -125,12 +83,6 @@ documentohiloPlist.prototype.getHeaderPageTableFunc = function (jsonMeta, strOb,
     } else {
         arr_meta_data_tableHeader_visibles = arr_meta_data_tableHeader;
     }
-//    if (acciones) {
-//        arr_meta_data_tableHeader_visibles_acciones = arr_meta_data_tableHeader_visibles.concat(['<div class="col-md-2">Acciones </div>']);
-//    } else {
-//        arr_meta_data_tableHeader_visibles_acciones = arr_meta_data_tableHeader_visibles;
-//    }
-//    return '<div class="row cabeceraGlobal">' + arr_meta_data_tableHeader_visibles_acciones.join('') + '</div>';
     return '<div class="row cabeceraGlobal">' + arr_meta_data_tableHeader_visibles.join('') + '</div>';
 }
 documentohiloPlist.prototype.getBodyPageTableFunc = function (meta, page, printPrincipal, tdButtons_function, trPopup_function, visibles) {
@@ -149,21 +101,17 @@ documentohiloPlist.prototype.getBodyPageTableFunc = function (meta, page, printP
     //every object contains the data and its metadata
     var arr_meta_data_table_buttons = _.map(matrix_meta_data_filtered, function (value, key) {
         return (_.map(matrix_meta_data_filtered[key], function (value2, key2) {
-//            return  
             var dataid = matrix_meta_data_filtered[key][0].data;
 
             if (value2.meta.Name == "titulo") {
                 return   '<div class="row post">'
                         + '<div class="col-md-1 icono">'
                         + '<i class="fa fa-list-alt fa-2x"></i>'
-
                         + '</div>'
-
                         + '<div class="col-md-7 titulo">'
                         + '<a  id="' + dataid + '"  href="#/post/plist/rpp=10&vf=10&systemfilter=obj_documento&systemfilteroperator=equals&systemfiltervalue=' + dataid + '">'
                         + printPrincipal(value2)
                         + '</a>'
-
                         + '</div>'
             } else {
 
@@ -175,7 +123,6 @@ documentohiloPlist.prototype.getBodyPageTableFunc = function (meta, page, printP
         })
                 )
                 .slice(1, parseInt(visibles))
-//                .concat(['<div class="botns">' + tdButtons_function(value, strOb) + '</div> </div>']);
                 .concat(['</div>']);
     });
     //is an array (rpp) of arrays (rows) of strings
@@ -226,11 +173,7 @@ documentohiloPlist.prototype.render = function () {
             this.getBodyPageTableFunc(jsonData.message.meta.message, jsonData.message.page.message, html.printPrincipal, this.loadButtons, this.loadPopups, paramsObject.vf)
             );
     return tab.getTab([
-//        {'name': 'Consulta', 'content': strGeneralInformation},
-//        {'name': 'Campos visibles', 'content': strVisibleFields},
-//        {'name': 'Filtro de servidor', 'content': strFilterForm},
         {'name': 'Indice de temas', 'content': strFilterFormClient}
-//        {'name': 'Nuevo registro', 'content': strNewButton}
     ]) + '<div id="tablePlace">' + strTable + '</div>';
 };
 
@@ -287,11 +230,6 @@ documentohiloPlist.prototype.bind = function () {
                 thisObject.getBodyPageTableFunc(jsonData.message.meta.message, arrayFiltered, html.printPrincipal, thisObject.loadButtons, thisObject.loadPopups, paramsObject.vf)
                 );
         $('#broth_content').empty().append(tab.getTab([
-//            {'name': 'Consulta', 'content': strGeneralInformation},
-//            {'name': 'Campos visibles', 'content': strVisibleFields},
-//            {'name': 'Filtro de servidor', 'content': strFilterForm},
-            {'name': 'Indice de temas', 'content': strFilterFormClient}
-//            {'name': 'Nuevo registro', 'content': strNewButton}
         ]) + '<div id="tablePlace">' + strTable + '</div>');
         return false;
     });

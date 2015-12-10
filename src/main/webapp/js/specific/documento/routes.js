@@ -75,9 +75,6 @@ function fDocumentoRoutes() {
     });
     //--------------------------------------------------------------------------
     Path.map("#/" + strClass + "/plist(/:url)").to(function () {
-        $('<link href="http://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css"/>').appendTo("head");
-        $('<link href="http://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css"/>').appendTo("head");
-        $('<link href="css/specific/basestyles.css" rel="stylesheet" type="text/css"/>').appendTo("head");
         header.empty().append(fillDocumentoPageHeader('Paginated List'));
         var strParam = parameter.getUrlObjectFromUrlString(this.params['url']);
         ausiasFLOW.reset();
@@ -86,9 +83,6 @@ function fDocumentoRoutes() {
     });
     //--------------------------------------------------------------------------
     Path.map("#/" + strClass + "/plist_labels_authors_x_ndocs(/:url)").to(function () {
-        $('<link href="http://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css"/>').appendTo("head");
-        $('<link href="http://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css"/>').appendTo("head");
-        $('<link href="css/specific/basestyles.css" rel="stylesheet" type="text/css"/>').appendTo("head");
         header.empty().append(fillDocumentoPageHeader('Paginated List'));
         var strParam = parameter.getUrlObjectFromUrlString(this.params['url']);
         ausiasFLOW.reset();
@@ -120,7 +114,6 @@ function fDocumentoRoutes() {
     });
     //--------------------------------------------------------------------------
     Path.map("#/" + strClass + "/hiloplist(/:url)").to(function () {
-        $('<link href="http://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css"/>').appendTo("head");
         $('<link href="http://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css"/>').appendTo("head");
         $('<link href="css/specific/basestyles.css" rel="stylesheet" type="text/css"/>').appendTo("head");
         var fillDocumentoPageHeader = _.partial(html.getPageHeader, icon, 'Foro', _);
@@ -131,7 +124,6 @@ function fDocumentoRoutes() {
         return false;
     });
     Path.map("#/" + strClass + "/hilonew(/:url)").to(function () {
-        $('<link href="http://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css"/>').appendTo("head");
         $('<link href="http://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css"/>').appendTo("head");
         $('<link href="css/specific/basestyles.css" rel="stylesheet" type="text/css"/>').appendTo("head");
         header.empty().append(fillDocumentoPageHeader('Crear un tema nuevo'));

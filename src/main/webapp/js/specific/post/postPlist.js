@@ -37,20 +37,12 @@ postPlist.prototype.getTitle = function (jsonData) {
     if (ltittle != 0) {
         titulo += jsonData.message.page.message[0].obj_documento.bean.titulo;
         h2 += '<h2>Posts sobre el tema : ' + titulo + '</h2>';
-//     return h2;
     } else {
         h2 = '<h2>No existen posts de este tema</h2>';
 
     }
     return h2;
 };
-
-//postPlist.prototype.getIdDocumento = function (jsonData) {
-//    var idDocumento = "";
-//    idDocumento=jsonData.message.page.message[0].obj_documento.bean.id;
-//    return idDocumento;
-//};
-
 
 postPlist.prototype.getHeaderPageTableFunc = function (jsonMeta, strOb, UrlFromParamsWithoutOrder, visibles, acciones) {
     thisObject = this;
@@ -95,8 +87,6 @@ postPlist.prototype.getHeaderPageTableFunc = function (jsonMeta, strOb, UrlFromP
     return '<div class="row cabeceraGlobal">' + arr_meta_data_tableHeader_visibles.join('') + '</div>';
 }
 postPlist.prototype.getBodyPageTableFunc = function (meta, page, printPrincipal, tdButtons_function, trPopup_function, visibles) {
-    //thisObject.jsonData.message.page.list: es un array de objetos. Cada objeto contiene una fila de la tabla de la petición
-    //thisObject.jsonData.message.meta; es un array de objetos. Every object contains metadata from every object to print in every row
     var matrix_meta_data = _.map(page, function (oRow, keyRow) {
         return _.map(meta, function (oMeta, keyMeta) {
             return  {meta: oMeta, data: oRow[oMeta.Name]};
@@ -111,24 +101,17 @@ postPlist.prototype.getBodyPageTableFunc = function (meta, page, printPrincipal,
     //every object contains the data and its metadata
     var arr_meta_data_table_buttons = _.map(matrix_meta_data_filtered, function (value, key) {
         return (_.map(matrix_meta_data_filtered[key], function (value2, key2) {
-            //  return  '<div class="col-md-1 matriz">' + printPrincipal(value2) + '</div>';
 
             if (value2.meta.Name == "obj_usuario") {
                 var user = matrix_meta_data_filtered[key][1].data.bean.login;
                 var userid = matrix_meta_data_filtered[key][1].data.bean.id;
                 return         '<div class="row post">'
-//                        + '<div class="col-md-1 icono">'
-//                        + '<i class="fa fa-list-ul fa-1x"></i>'
-
-//                        + '</div>'
-
                         + '<div class="col-md-2  col-xs-3 usuario">'
                         + '<i class="fa fa-user fa-4x"></i>'
                         + '</br>'
                         + '<a href="#/usuario/view/' + userid + '">'
                         + user
                         + '</a>'
-//                        + printPrincipal(value2)
                         + '</div>'
             } else {
 
@@ -191,13 +174,8 @@ postPlist.prototype.render = function () {
             this.getBodyPageTableFunc(jsonData.message.meta.message, jsonData.message.page.message, html.printPrincipal, this.loadButtons, this.loadPopups, paramsObject.vf)
             );
     return tab.getTab([
-//        {'name': 'Consulta', 'content': strGeneralInformation},
-//        {'name': 'Campos visibles', 'content': strVisibleFields},
-//        {'name': 'Búsquedas', 'content': strFilterForm},
         {'name': 'Búsquedas', 'content': strFilterFormClient},
-//        {'name': 'Nuevo registro', 'content': strNewButton}
     ]) + '<div id="tablePlace">' + titlePost + strTable + '</div>';
-//    ]) + '<div id="tablePlace">' + strTable + '</div>';
 };
 
 
@@ -229,7 +207,6 @@ postPlist.prototype.bind = function () {
         var filtervalue = $("#inputFiltervalueClient").val();
         //pte  -> reconstruir this.jsonPage con /word/.test(str)
         var arrayFiltered = array.filterArray(filtervalue, jsonData.message.page.message);
-        //window.location.href = '#/' + thisObject.strClase + '/plist/' + parameter.getUrlStringFromParamsObject(parameter.getUrlObjectFromParamsWithoutParamArray(thisObject.objParams, ['filter', 'filteroperator', 'filtervalue'])) + "&filter=" + filter + "&filteroperator=" + filteroperator + "&filtervalue=" + filtervalue;
 
         var strUrlFromParamsWithoutPage = parameter.getUrlStringFromParamsObject(parameter.getUrlObjectFromParamsWithoutParamArray(paramsObject, ["order", "ordervalue"]));
         titlePost = this.getTitle(jsonData);
@@ -238,12 +215,7 @@ postPlist.prototype.bind = function () {
                 thisObject.getBodyPageTableFunc(jsonData.message.meta.message, arrayFiltered, html.printPrincipal, thisObject.loadButtons, thisObject.loadPopups, paramsObject.vf)
                 );
         $('#broth_content').empty().append(tab.getTab([
-//            {'name': 'Consulta', 'content': strGeneralInformation},
-//            {'name': 'Campos visibles', 'content': strVisibleFields},
-//            {'name': 'Filtro de servidor', 'content': strFilterForm},
             {'name': 'Búsquedas', 'content': strFilterFormClient},
-//            {'name': 'Nuevo registro', 'content': strNewButton}
-//        ]) + '<div id="tablePlace">' + strTable + '</div>');
         ]) + '<div id="tablePlace">' + titlePost + strTable + '</div>');
         return false;
     });
@@ -271,7 +243,6 @@ postPlist.prototype.filterFormClientTemplate = function (id) {
 postPlist.prototype.loadButtons = function (rowValues, strClass) {
     var botonera = "";
     botonera += '<div class="btn-toolbar" role="toolbar"><div class="btn-group btn-group-xs">';
-//    botonera += '<a class="btn btn-default view" id="' + rowValues[0].data + '"  href="#/' + strClass + '/view/' + rowValues[0].data + '"><i class="glyphicon glyphicon-eye-open"></i></a>';
     botonera += '<a class="btn btn-default edit" id="' + rowValues[0].data + '"  href="#/' + strClass + '/edit/' + rowValues[0].data + '"><i class="glyphicon glyphicon-pencil"></i></a>';
     botonera += '<a class="btn btn-default remove" id="' + rowValues[0].data + '"  href="#/' + strClass + '/remove/' + rowValues[0].data + '"><i class="glyphicon glyphicon-remove"></i></a>';
     botonera += '</div></div>';

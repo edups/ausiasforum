@@ -36,7 +36,6 @@ function fPostRoutes() {
 
     //--------------------------------------------------------------------------
     Path.map("#/" + strClass + "/remove/:id").to(function () {
-        $('<link href="http://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css"/>').appendTo("head");
         $('<link href="http://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css"/>').appendTo("head");
         $('<link href="css/specific/basestyles.css" rel="stylesheet" type="text/css"/>').appendTo("head");
         header.empty().append(fillDocumentoPageHeader('Remove'));
@@ -47,7 +46,6 @@ function fPostRoutes() {
     });
     //--------------------------------------------------------------------------
     Path.map("#/" + strClass + "/new(/:url)").to(function () {
-        $('<link href="http://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css"/>').appendTo("head");
         $('<link href="http://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css"/>').appendTo("head");
         $('<link href="css/specific/basestyles.css" rel="stylesheet" type="text/css"/>').appendTo("head");
         header.empty().append(fillDocumentoPageHeader('New'));
@@ -58,7 +56,6 @@ function fPostRoutes() {
     });
     //--------------------------------------------------------------------------    
     Path.map("#/" + strClass + "/edit/:url").to(function () {
-        $('<link href="http://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css"/>').appendTo("head");
         $('<link href="http://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css"/>').appendTo("head");
         $('<link href="css/specific/basestyles.css" rel="stylesheet" type="text/css"/>').appendTo("head");
         header.empty().append(fillDocumentoPageHeader('Edit'));
@@ -69,7 +66,6 @@ function fPostRoutes() {
     });
     //--------------------------------------------------------------------------
     Path.map("#/" + strClass + "/view/:id").to(function () {
-        $('<link href="http://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css"/>').appendTo("head");
         $('<link href="http://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css"/>').appendTo("head");
         $('<link href="css/specific/basestyles.css" rel="stylesheet" type="text/css"/>').appendTo("head");
         header.empty().append(fillDocumentoPageHeader('View'));
@@ -80,7 +76,6 @@ function fPostRoutes() {
     });
     //--------------------------------------------------------------------------    
     Path.map("#/" + strClass + "/list(/:url)").to(function () {
-        $('<link href="http://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css"/>').appendTo("head");
         $('<link href="http://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css"/>').appendTo("head");
         $('<link href="css/specific/basestyles.css" rel="stylesheet" type="text/css"/>').appendTo("head");
         header.empty().append(fillDocumentoPageHeader('List'));
@@ -91,9 +86,6 @@ function fPostRoutes() {
     });
     //--------------------------------------------------------------------------
     Path.map("#/" + strClass + "/plist(/:url)").to(function () {
-//        $( "<style>background-color: black;</style>" ).appendTo( content );
-//           var myEstilo ="paquito.css";
-        $('<link href="http://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css"/>').appendTo("head");
         $('<link href="http://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css"/>').appendTo("head");
         $('<link href="css/specific/basestyles.css" rel="stylesheet" type="text/css"/>').appendTo("head");
         header.empty().append(fillDocumentoPageHeader('Listado de Posts'));
@@ -103,7 +95,6 @@ function fPostRoutes() {
         return false;
     });
     Path.map("#/" + strClass + "/postdocumento(/:url)").to(function () {
-        $('<link href="http://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css"/>').appendTo("head");
         $('<link href="http://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css"/>').appendTo("head");
         $('<link href="css/specific/basestyles.css" rel="stylesheet" type="text/css"/>').appendTo("head");
 //        
