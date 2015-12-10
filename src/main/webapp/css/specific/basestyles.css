@@ -87,9 +87,8 @@ h2{
 }
 
 .usuario{
- /*border-right: 1px solid black;*/
+
      background-color: #ecf2f8;
-/*     min-height:150px;*/
      text-align:center;
      box-sizing: border-box;
      margin: 5px;
@@ -102,7 +101,7 @@ h2{
 .post .matriz:nth-child(3){
    margin-top:60px;
  
-   text-align: left;
+   text-align: right;
 }
 a,#btnFiltrarClient{
     color:steelblue;
@@ -126,9 +125,6 @@ td{
     background-color: #13DACC;
 }
 
-.post .matriz:nth-child(3) {
-    margin-top:3.5px;
-}
 .titulo{
     margin-top:3.2px;
 }

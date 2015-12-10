@@ -69,7 +69,7 @@ documentohiloPlist.prototype.getHeaderPageTableFunc = function (jsonMeta, strOb,
                     + thisObject.loadThButtons(oMeta, strOb, UrlFromParamsWithoutOrder)
                     + '</div>';
         } else {
-            return  '<div class="col-md-2  cabeceraCuerpo">'
+            return  '<div class="col-md-2  col-md-offset-2 cabeceraCuerpo">'
                     + 'Fecha de Creación'
                     + '<br />'
                     + thisObject.loadThButtons(oMeta, strOb, UrlFromParamsWithoutOrder)
@@ -115,7 +115,7 @@ documentohiloPlist.prototype.getBodyPageTableFunc = function (meta, page, printP
                         + '</div>'
             } else {
 
-                return '<div class="col-md-4 matriz">'
+                return '<div class="col-md-2 col-md-offset-2 matrizPri">'
                         + printPrincipal(value2)
                         + '</div>';
             }
