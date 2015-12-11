@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 05-11-2015 a las 09:14:51
--- Versión del servidor: 5.6.26
--- Versión de PHP: 5.5.29
+-- Tiempo de generación: 11-12-2015 a las 00:29:01
+-- Versión del servidor: 5.6.27
+-- Versión de PHP: 5.5.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -97,7 +97,7 @@ CREATE TABLE IF NOT EXISTS `documento` (
   `portada` tinyint(1) DEFAULT NULL COMMENT 'Portada',
   `destacado` tinyint(1) DEFAULT NULL COMMENT 'Destacado',
   `id_tipodocumento` int(6) DEFAULT NULL COMMENT 'Tipo'
-) ENGINE=InnoDB AUTO_INCREMENT=91 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=98 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Volcado de datos para la tabla `documento`
@@ -128,8 +128,6 @@ INSERT INTO `documento` (`id`, `titulo`, `contenido`, `alta`, `cambio`, `hits`, 
 (37, 'ads', 'asd', '2014-09-28', '2014-09-28', 2, 1, 'das', 0, 0, 0, 3),
 (38, 'fd', 'fsdfsd', '2014-09-28', '2014-09-28', 2, 1, 'das', 0, 0, 0, 3),
 (39, 'fadf', 'sdf', '2014-09-28', '2014-09-28', 2222, 1, 'ana', 1, 1, 0, 3),
-(41, 'fsd', 'sdf', '2014-09-28', '2014-09-28', 3, 1, 'ana', 0, 0, 0, 1),
-(45, 'sdf', 'sdfaaaaaaaaaa', '2014-09-30', '2014-09-30', 3333, 1, 'fdsfsdf', 1, 1, 0, 1),
 (46, 'hfghf', 'hf', '2014-10-19', '2014-10-19', 4, 1, 'hfg', 1, 1, 1, 6),
 (47, 'hfgh', 'fhgh', '2014-10-24', '2014-10-24', 55, 1, '12%20rrr', 1, 1, 1, 2),
 (48, 'gggggggg', 'hhhhhhhhhhh', '2014-10-25', '2014-10-25', 333, 2, 'gfdgdf%20rrrr', 1, 1, 1, 5),
@@ -174,7 +172,10 @@ INSERT INTO `documento` (`id`, `titulo`, `contenido`, `alta`, `cambio`, `hits`, 
 (87, 'r', 'r', '2015-10-11', '2015-10-11', 3, 0, 'r', 1, 0, 0, 0),
 (88, 'Pregunta uno', 'Cuestionario prueba', '2015-11-03', '2015-11-03', 0, 7, 'who, is, the, best', 0, 1, 0, 12),
 (89, 'Pregunta 2', 'Esto es una pregunta?', '2015-11-03', '2015-11-03', NULL, 6, 'pregunta, tocapelotas', 0, 1, 0, 12),
-(90, 'hola adios', 'estas o no?', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+(90, 'hola adios', 'estas o no?', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(95, 'Apuntes%20de%20Servidor', NULL, '2015-12-11', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1),
+(96, 'Duda%20sobre%20manejo%20de%20fechas%20en%20Java', NULL, '2015-12-11', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1),
+(97, 'Problema%20con%20proyecto%20AusiasYield', NULL, '2015-12-11', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -294,28 +295,25 @@ CREATE TABLE IF NOT EXISTS `post` (
   `id_documento` int(11) DEFAULT NULL COMMENT 'Documento',
   `mensaje` text COLLATE utf8_unicode_ci COMMENT 'Mensaje',
   `fecha` datetime DEFAULT NULL COMMENT 'Fecha'
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=63 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Volcado de datos para la tabla `post`
 --
 
 INSERT INTO `post` (`id`, `id_usuario`, `id_documento`, `mensaje`, `fecha`) VALUES
-(1, 3, 1, 'aasdfg', '2015-11-02 12:17:19'),
-(2, 5, 2, 'qwerty', '2015-10-04 03:07:03'),
-(3, 8, 58, 'pouihfpoiugb qepifv', '2015-09-29 17:30:00'),
-(4, 2, 26, 'wiutdf gwqdfgqw fvwf wydfg ibf', '2015-09-27 07:13:37'),
-(5, 6, 8, 'fcvigyvk gdw wqdb di vw', '2015-09-04 21:13:33'),
-(6, 27, 58, 'lorem ipsum', '2015-09-16 06:30:14'),
-(7, 8, 28, 'one piece treasure cruise para android y mac es la polla', '2015-09-15 13:50:31'),
-(8, 17, 27, '¿Qué opinas sobre las personas que no pegan ni chapa en clase? (como yo)', '2015-09-14 09:32:19'),
-(9, 19, 73, 'ambrosio deja de pelarte la clase', '2015-11-28 05:48:27'),
-(10, 1, 29, 'pepito come macarrones, mama no quiero macarrones', '2015-11-01 18:29:25'),
-(11, 14, 28, 'hola fondo norte.\r\nhola fondo surrr.', NULL),
-(12, 20, 48, 'El teclado blanco de Microsoft mola mucho, el teclado negro  de Logitech no me gusta nada.', '2015-11-17 00:28:00'),
-(13, 26, 77, 'El cargador de móvil inalámbrico funciona pefectamente.', '2015-09-08 02:17:44'),
-(14, 29, 57, 'El mes de Septiembre es fresquito.', '2015-09-29 21:20:32'),
-(15, 13, 5, 'Me gustaría saber que opinión tienen sobre la nueva versión de Android. ', '2015-11-23 11:18:23');
+(49, 11, 95, 'A%20petici%C3%B3n%20de%20aquel%20que%20lo%20quiera%20os%20ir%C3%A9%20pasando%20apuntes%20de%20servidor.%20Para%20ello%2C%20enviadme%20vuestros%20correos%20electr%C3%B3nicos%20y%20os%20mandar%C3%A9%20un%20.zip%20con%20los%20apuntes%20del%20curso.%20', '2015-12-11 08:24:52'),
+(51, 1, 95, 'A%20m%C3%AD%20me%20interesan%20estos%20apuntes%2C%20%C2%BFme%20los%20puedes%20pasar%3F%20Mi%20correo%20es%20pepe.palomo%40gmail.com.%20%C2%A1Gracias!', '2015-12-11 08:30:24'),
+(53, 11, 95, 'Ya%20te%20los%20he%20enviado%2C%20espero%20que%20te%20ayuden%20para%20aprobar%20la%20asignatura.', '2015-12-11 08:31:36'),
+(54, 4, 95, 'A%20m%C3%AD%20tambi%C3%A9n%20me%20interesan%20los%20apuntes%2C%20Rafael.%20Mi%20correo%20electr%C3%B3nico%20es%3A%20antonia.dellate%40gmail.com', '2015-12-11 08:32:55'),
+(55, 11, 95, 'Te%20los%20acabo%20de%20enviar%2C%20espero%20que%20te%20sirvan.%20Un%20saludo.', '2015-12-11 08:34:21'),
+(56, 4, 96, 'Hola%2C%20tengo%20una%20duda%20de%20c%C3%B3mo%20formatear%20fechas%20en%20Java%2C%20%C2%BFalguien%20me%20puede%20explicar%20c%C3%B3mo%20hacerlo%3F', '2015-12-11 08:37:24'),
+(57, 11, 96, 'Me%20pillas%20un%20poco%20liado%20ahora%2C%20esta%20noche%20en%20casa%20te%20paso%20un%20tutorial%20en%20pdf.', '2015-12-11 08:39:18'),
+(58, 4, 96, 'Gracias%20Rafael%2C%20te%20lo%20agradezco.', '2015-12-11 08:39:46'),
+(59, 7, 96, 'Aqu%C3%AD%20tienes%20un%20manual%20en%20pdf%2C%20espero%20que%20te%20sirva%3A%20http%3A//www.tutorialspoint.com/java/pdf/java_date_time.pdf', '2015-12-11 08:41:32'),
+(60, 11, 96, 'El%20manual%20que%20te%20ha%20pasado%20Silvia%20te%20puede%20servir%2C%20l%C3%A9etelo%20y%20si%20te%20sigues%20atascando%20av%C3%ADsame%20y%20te%20paso%20m%C3%A1s%20documentaci%C3%B3n.', '2015-12-11 08:42:26'),
+(61, 4, 96, 'Gracias%20a%20los%20dos!', '2015-12-11 08:43:48'),
+(62, 1, 97, 'Tengo%20un%20problema%20con%20mi%20proyecto%20de%20AusiasYield.%20He%20clonado%20el%20proyecto%20desde%20el%20GitHub%20de%20Rafael%20pero%20no%20me%20compila%20correctamente.%20%C2%BFPuede%20ser%20un%20problema%20de%20puertos%3F%20%C2%BFMe%20falta%20alg%C3%BAn%20archivo%20importante%3F%20%C2%A1Ayuda!', '2015-12-11 08:48:02');
 
 -- --------------------------------------------------------
 
@@ -388,14 +386,14 @@ CREATE TABLE IF NOT EXISTS `tipodocumento` (
   `id` int(6) NOT NULL,
   `descripcion` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   `privado` tinyint(4) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Volcado de datos para la tabla `tipodocumento`
 --
 
 INSERT INTO `tipodocumento` (`id`, `descripcion`, `privado`) VALUES
-(1, 'oferta de trabajo', 1),
+(1, 'hilo', 1),
 (2, 'currículum', 1),
 (3, 'actividad', 1),
 (4, 'experiencia', 1),
@@ -575,7 +573,7 @@ ALTER TABLE `comentario`
 -- AUTO_INCREMENT de la tabla `documento`
 --
 ALTER TABLE `documento`
-  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT COMMENT 'Num.',AUTO_INCREMENT=91;
+  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT COMMENT 'Num.',AUTO_INCREMENT=98;
 --
 -- AUTO_INCREMENT de la tabla `documentocategoriaarticulo`
 --
@@ -595,7 +593,7 @@ ALTER TABLE `opcion`
 -- AUTO_INCREMENT de la tabla `post`
 --
 ALTER TABLE `post`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Num.',AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Num.',AUTO_INCREMENT=63;
 --
 -- AUTO_INCREMENT de la tabla `pregunta`
 --
@@ -610,7 +608,7 @@ ALTER TABLE `respuesta`
 -- AUTO_INCREMENT de la tabla `tipodocumento`
 --
 ALTER TABLE `tipodocumento`
-  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=14;
+  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT de la tabla `tipousuario`
 --
